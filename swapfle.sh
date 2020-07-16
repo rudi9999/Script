@@ -2,7 +2,7 @@
 echo ""
 echo "========================"
 echo "creando archivo swap"
-sudo dd if=/dev/zero of=/swapfile bs=1MB count=2048
+dd if=/dev/zero of=/swapfile bs=1MB count=2048
 echo "========================"
 sleep 3
 echo "comprovando tamaño del archivo"
