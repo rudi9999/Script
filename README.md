@@ -1,3 +1,3 @@
 # SwapFile
 
-sudo wget https://github.com/rudi9999/Script/blob/master/swapfle.sh; chmod +x swapfle.sh* && ./swapfle.sh
+sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/swapfle.sh; chmod +x swapfle.sh* && ./swapfle.sh
