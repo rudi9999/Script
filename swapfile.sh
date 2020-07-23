@@ -7,9 +7,9 @@ echo -e $BARRA
 echo "Enter para continuar..."
 read foo
 
-swap=swap
-fstab=fstab
-sysctl=sysctl.conf
+swap=/swapfile
+fstab=/etc/fstab
+sysctl=/etc/sysctl.conf
 
 funcion_crear () {
 clear
