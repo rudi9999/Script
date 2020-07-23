@@ -31,6 +31,8 @@ case $opcion in
 1)
 clear
 echo -e $BARRA
+echo "Creando archivo swapfile"
+echo -e $BARRA
 dd if=/dev/zero of=$swap bs=1MB count=2048
 echo -e $BARRA
 echo "Archivo creado"
@@ -38,12 +40,16 @@ echo "comprueve detalles en la opcion 2";;
 2)
 clear
 echo -e $BARRA
+echo "Creando archivo swapfile"
+echo -e $BARRA
 dd if=/dev/zero of=$swap bs=1MB count=4096
 echo -e $BARRA
 echo "Archivo creado"
 echo "comprueve detalles en la opcion 2";;
 3)
 clear
+echo -e $BARRA
+echo "Creando archivo swapfile"
 echo -e $BARRA
 dd if=/dev/zero of=$swap bs=1MB count=8192
 echo -e $BARRA
