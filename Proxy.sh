@@ -84,7 +84,7 @@ PASS = str("$ipdns")
 BUFLEN = 4096 * 4
 TIMEOUT = 60
 DEFAULT_HOST = '127.0.0.1:22'
-msg = "HTTP/1.1 200 <strong>($RETORNO)</strong>\r\nContent-length: 0\r\n\r\nHTTP/1.1 200 !!!conexion exitosa!!!\r\n\r\n"
+msg = "HTTP/1.1 200 <strong>$RETORNO</strong>\r\nContent-length: 0\r\n\r\nHTTP/1.1 200 !!!conexion exitosa!!!\r\n\r\n"
 RESPONSE = str(msg)
 
 class Server(threading.Thread):
