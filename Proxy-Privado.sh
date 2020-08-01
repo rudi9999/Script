@@ -18,8 +18,8 @@ echo -e "\033[1;31mPROXY PYTHON COLOR\033[0m"
 echo -e "$BARRA"
 echo -ne "Introduzca puerto: "
 read port
-echo -e "$BARRA"
 
+#echo -e "$BARRA"
 #echo -e "\033[1;31mATENCION:\n\033[1;34mPara Utilizar Este Proxy Es Necesario Agregar Una Linea A Su Payload\033[0m"
 #echo -e "$BARRA"
 # echo -ne "Escriba Una Contrasena Para El Proxy: "
@@ -297,30 +297,6 @@ class ConnectionHandler(threading.Thread):
 
             if error:
                 break
-
-
-def print_usage():
-    print 'Usage: proxy.py -p <port>'
-    print '       proxy.py -b <bindAddr> -p <port>'
-    print '       proxy.py -b 0.0.0.0 -p 80'
-
-def parse_args(argv):
-    global LISTENING_ADDR
-    global LISTENING_PORT
-    
-    try:
-        opts, args = getopt.getopt(argv,"hb:p:",["bind=","port="])
-    except getopt.GetoptError:
-        print_usage()
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
-            print_usage()
-            sys.exit()
-        elif opt in ("-b", "--bind"):
-            LISTENING_ADDR = arg
-        elif opt in ("-p", "--port"):
-            LISTENING_PORT = int(arg)
 
 
 def main(host=LISTENING_ADDR, port=LISTENING_PORT):
