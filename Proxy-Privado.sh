@@ -18,17 +18,16 @@ echo -e "\033[1;31mPROXY PYTHON COLOR\033[0m"
 echo -e "$BARRA"
 echo -ne "Introduzca puerto: "
 read port
-
-#echo -e "$BARRA"
-#echo -e "\033[1;31mATENCION:\n\033[1;34mPara Utilizar Este Proxy Es Necesario Agregar Una Linea A Su Payload\033[0m"
-#echo -e "$BARRA"
-# echo -ne "Escriba Una Contrasena Para El Proxy: "
-# read ipdns
-#if [[ ! -z $ipdns ]]; then
-#echo -e "$BARRA"
-#echo -e "\033[1;34mAGREGUE ESTA LINEA AL INICIO DE SU PAYLOAD:\n\033[1;36m[crlf]X-Pass: $ipdns[crlf]\n\033[0m"
-#echo -e "\033[1;31mEJEMPLO:\n\033[1;33m\033[1;36m[crlf]X-Pass: $ipdns[crlf]GET http://tuhost.com/ HTTP/1.0 [cr|f]\033[0m"
-#fi
+echo -e "$BARRA"
+echo -e "\033[1;31mATENCION:\n\033[1;34mPara Utilizar Este Proxy Es Necesario Agregar Una Linea A Su Payload\033[0m"
+echo -e "$BARRA"
+echo -ne "Escriba Una Contrasena Para El Proxy: "
+read ipdns
+if [[ ! -z $ipdns ]]; then
+echo -e "$BARRA"
+echo -e "\033[1;34mAGREGUE ESTA LINEA AL INICIO DE SU PAYLOAD:\n\033[1;36m[crlf]X-Pass: $ipdns[crlf]\n\033[0m"
+echo -e "\033[1;31mEJEMPLO:\n\033[1;33m\033[1;36m[crlf]X-Pass: $ipdns[crlf]GET http://tuhost.com/ HTTP/1.0 [cr|f]\033[0m"
+fi
 
 while [[ -z $FMSG || $FMSG = @(s|S|y|Y) ]]; do
 echo -e "$BARRA"
@@ -81,8 +80,7 @@ import socket, threading, thread, select, signal, sys, time, getopt
 
 LISTENING_ADDR = '0.0.0.0'
 LISTENING_PORT = int("$port")
-# PASS = str("$ipdns")
-PASS = ''
+PASS = str("$ipdns")
 BUFLEN = 4096 * 4
 TIMEOUT = 60
 DEFAULT_HOST = '127.0.0.1:22'
@@ -297,6 +295,30 @@ class ConnectionHandler(threading.Thread):
 
             if error:
                 break
+		
+		
+def print_usage():
+    print 'Usage: proxy.py -p <port>'
+    print '       proxy.py -b <bindAddr> -p <port>'
+    print '       proxy.py -b 0.0.0.0 -p 80'
+
+def parse_args(argv):
+    global LISTENING_ADDR
+    global LISTENING_PORT
+    
+    try:
+        opts, args = getopt.getopt(argv,"hb:p:",["bind=","port="])
+    except getopt.GetoptError:
+        print_usage()
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print_usage()
+            sys.exit()
+        elif opt in ("-b", "--bind"):
+            LISTENING_ADDR = arg
+        elif opt in ("-p", "--port"):
+            LISTENING_PORT = int(arg)
 
 
 def main(host=LISTENING_ADDR, port=LISTENING_PORT):
