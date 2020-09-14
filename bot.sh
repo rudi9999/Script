@@ -15,23 +15,27 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token"
 ShellBot.username
 
-# boas vindas
-msg_bem_vindo()
-{
-	local msg
+meu_ip () {
+if [[ -e /etc/MEUIPADM ]]; then
+echo "$(cat /etc/MEUIPADM)"
+else
+MEU_IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+MEU_IP2=$(wget -qO- ipv4.icanhazip.com)
+[[ "$MEU_IP" != "$MEU_IP2" ]] && echo "$MEU_IP2" || echo "$MEU_IP"
+echo "$MEU_IP2" > /etc/MEUIPADM
+fi
+}
 
-	# Texto da mensagem
-	msg="🆔 [@${message_new_chat_member_username[$id]:-null}]\n"
-    msg+="🗣 Olá *${message_new_chat_member_first_name[$id]}*"'!!\n\n'
-    msg+="Seja bem-vindo(a) ao *${message_chat_title[$id]}*.\n\n"
-    msg+='`Se precisar de ajuda ou informações sobre meus comandos, é só me chamar no privado.`'"[@$(ShellBot.username)]"
-
-	# Envia a mensagem de boas vindas.
-	ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "$(echo -e $msg)" \
+infovps () {
+local bot_retorno="$LINE\n"
+          bot_retorno+="Su IP es\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="IP: $(meu_ip)\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "$(echo -e $bot_retorno)" \
 							--parse_mode markdown
-
-	return 0	
+	return 0
 }
 
 ajuda_fun () {
@@ -54,6 +58,8 @@ local bot_retorno="$LINE\n"
          bot_retorno+="/gerar gerador de payload\n"
          bot_retorno+="/criptar Codifica e Decodifica um Texto\n"
          bot_retorno+="/logar Usuario Senha libera o bot\n"
+	 bot_retorno+="/Key\n"
+	 bot_retorno+="/ID\n"
          bot_retorno+="$LINE\n"
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "$(echo -e $bot_retorno)" \
