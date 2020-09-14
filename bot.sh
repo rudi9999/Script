@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# verificacion primarias
+[[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] || apt-get install jq -y &>/dev/null
+[[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/Install/ShellBot.sh &> /dev/null
+[[ -e /etc/texto-bot ]] && rm /etc/texto-bot
+
 # Importando API
 source ShellBot.sh
 
@@ -29,7 +34,17 @@ msg_bem_vindo()
 	return 0	
 }
 
-keys='Admin/06383b7a@58@8dc/8888:%0@+78@+88@+5@'
+blockfun () {
+local bot_retorno="$LINE\n"
+          bot_retorno+="VOCE NAO PODE USAR O BOT\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="Comandos Bloqueados\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "$(echo -e $bot_retorno)" \
+							--parse_mode markdown
+	return 0
+}
 
 key_fun () {
 local bot_retorno="====================\n"
