@@ -48,6 +48,9 @@ fi
 }
 
 reboot_fun () {
+ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+--text Reiniciando... \
+sleep 2
 reboot
 }
 
