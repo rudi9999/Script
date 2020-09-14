@@ -29,6 +29,15 @@ msg_bem_vindo()
 	return 0	
 }
 
+key_fun () {
+local bot_retorno="====================\n"
+          bot_retorno+="Admin/06383b7a@58@8dc/8888:%0@+78@+88@+5@\n"
+          bot_retorno+="====================\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+}
+
 myid_fun () {
 local bot_retorno="====================\n"
           bot_retorno+="SU ID: ${chatuser}\n"
@@ -59,6 +68,7 @@ while true; do
 	    case ${comando[0]} in
 	      /[Tt]este|[Tt]este)teste_fun &;;
 	      /[Ii]d|[Ii]d|/[Ii]D|[Ii]D)myid_fun &;;
+	      /[Kk]ey|[Kk]key)key_fun &;;
 		  /[Aa]juda|[Aa]juda|[Hh]elp|/[Hh]elp)ajuda_fun &;;
 		  /[Ss]tart|[Ss]tart|[Cc]omecar|/[Cc]omecar)ajuda_fun &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
