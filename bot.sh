@@ -47,6 +47,18 @@ echo "$MEU_IP2" > /etc/MEUIPADM
 fi
 }
 
+reboot_fun () {
+local bot_retorno="$LINE\n"
+          bot_retorno+="Reiniciando...\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "$(echo -e $bot_retorno)" \
+							--parse_mode markdown
+	return 0
+sleep 1
+sudo reboot
+}
+
 infovps () {
 local bot_retorno="$LINE\n"
           bot_retorno+="S.O: $(os_system)\n"
@@ -147,6 +159,7 @@ while true; do
 	      /[Tt]este|[Tt]este)teste_fun &;;
 	      /[Ii]d|[Ii]d|/[Ii]D|[Ii]D)myid_fun &;;
 	      /[Kk]ey|[Kk]ey)key_fun &;;
+	      /[Rr]eboot|[Rr]eboot)reboot_fun &;;
 		  /[Aa]juda|[Aa]juda|/[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omecar|/[Cc]omecar)ajuda_fun &;;
 		  /[Ii]nfovps|[Ii]nfovps)infovps &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
