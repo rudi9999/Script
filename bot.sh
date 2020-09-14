@@ -36,7 +36,7 @@ msg_bem_vindo()
 
 blockfun () {
 local bot_retorno="$LINE\n"
-          bot_retorno+="VOCE NAO PODE USAR O BOT\n"
+          bot_retorno+="Usted no tiene permitdo usar este bot\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="Comandos Bloqueados\n"
           bot_retorno+="$LINE\n"
