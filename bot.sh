@@ -120,6 +120,7 @@ while true; do
 	      /[Ii]d|[Ii]d|/[Ii]D|[Ii]D)myid_fun &;;
 	      /[Kk]ey|[Kk]ey)key_fun &;;
 		  /[Aa]juda|[Aa]juda|/[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omecar|/[Cc]omecar)ajuda_fun &;;
+		  [Ii]nfovps|/[Ii]nfovps)infovps &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
 		  *)if [[ ! -z $LIBERADOS ]] && [[ $(echo ${LIBERADOS}|grep -w "${chatuser}") ]]; then
              case ${comando[0]} in
@@ -128,7 +129,6 @@ while true; do
              [Uu]seradd|/[Uu]seradd|[Aa]dd|/[Aa]dd)useradd_fun "${comando[1]}" "${comando[2]}" "${comando[3]}" "${comando[4]}" &;;
              [Uu]serdell|/[Uu]serdell|[Dd]ell|/[Dd]ell)userdell_fun "${comando[1]}" &;;
              [Ii]nfo|/[Ii]nfo)info_fun &;;
-             [Ii]nfovps|/[Ii]nfovps)infovps &;;
              [Ll]ang|/[Ll]ang)language_fun "${comando[@]}" &;;
              [Oo]penadd|/[Oo]penadd|[Oo]pen|/[Oo]pen)openadd_fun "${comando[1]}" "${comando[2]}" &;;
              [Gg]erar|/[Gg]erar|[Pp]ay|/[Pp]ay)paygen_fun "${comando[1]}" "${comando[2]}" "${comando[3]}" &;;
