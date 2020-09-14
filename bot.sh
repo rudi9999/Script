@@ -36,7 +36,7 @@ local bot_retorno="====================\n"
           bot_retorno+="Admin/06383b7a@58@8dc/8888:%0@+78@+88@+5@\n"
           bot_retorno+="====================\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e 'Admin/06383b7a@58@8dc/8888:%0@+78@+88@+5@')_" \
+							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
 }
 
