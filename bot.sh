@@ -31,7 +31,7 @@ msg_bem_vindo()
 
 myid_fun () {
 local bot_retorno="====================\n"
-          bot_retorno+="Su ID: ${chatuser}\n"
+          bot_retorno+="SU ID: ${chatuser}\n"
           bot_retorno+="ARGUMENTOS: ${comando[@]}\n"
           bot_retorno+="====================\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
