@@ -49,13 +49,6 @@ fi
 
 reboot_fun () {
 reboot
-local bot_retorno="$LINE\n"
-          bot_retorno+="Reiniciando...\n"
-          bot_retorno+="$LINE\n"
-	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "$(echo -e $bot_retorno)" \
-							--parse_mode markdown
-	return 0
 }
 
 infovps () {
