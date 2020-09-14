@@ -5,6 +5,22 @@
 [[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/Install/ShellBot.sh &> /dev/null
 [[ -e /etc/texto-bot ]] && rm /etc/texto-bot
 
+#HORA Y FECHA
+_hora=$(printf '%(%H:%M:%S)T') 
+_fecha=$(printf '%(%D)T') 
+
+#PROCESSADOR
+_core=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
+_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
+
+#SISTEMA-USO DA CPU-MEMORIA RAM
+ram1=$(free -h | grep -i mem | awk {'print $2'})
+ram2=$(free -h | grep -i mem | awk {'print $4'})
+ram3=$(free -h | grep -i mem | awk {'print $3'})
+
+_ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
+_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
+
 # Importando API
 source ShellBot.sh
 
@@ -28,9 +44,14 @@ fi
 
 infovps () {
 local bot_retorno="$LINE\n"
-          bot_retorno+="Su IP es\n"
-          bot_retorno+="$LINE\n"
-          bot_retorno+="IP: $(meu_ip)\n"
+          bot_retorno+="S.O: $(os_system)\n"
+	  bot_retorno+="Su IP es: $(meu_ip)\n"
+	  bot_retorno+="Su IP es\n"
+	  bot_retorno+="Su IP es\n"
+	  bot_retorno+="Su IP es\n"
+	  bot_retorno+="Su IP es\n"
+	  bot_retorno+="Su IP es\n"
+	  bot_retorno+="Su IP es\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "$(echo -e $bot_retorno)" \
