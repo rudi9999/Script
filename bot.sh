@@ -63,8 +63,11 @@ local bot_retorno="$LINE\n"
 	  bot_retorno+="LIBRE: $ram2\n"
 	  bot_retorno+="USO DE RAM: $_usor\n"
 	  bot_retorno+="$LINE\n"
-	  bot_retorno+="Su IP es\n"
-	  bot_retorno+="Su IP es\n"
+	  bot_retorno+="CPU: $_core\n"
+	  bot_retorno+="USO DE CPU: $_usop\n"
+	  bot_retorno+="$LINE\n"
+	  bot_retorno+="FECHA: $_fecha\n"
+	  bot_retorno+="HORA: $_hora\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "$(echo -e $bot_retorno)" \
