@@ -68,7 +68,7 @@ while true; do
 	    case ${comando[0]} in
 	      /[Tt]este|[Tt]este)teste_fun &;;
 	      /[Ii]d|[Ii]d|/[Ii]D|[Ii]D)myid_fun &;;
-	      /[Kk]ey|[Kk]key)key_fun &;;
+	      /[Kk]ey|[Kk]ey)key_fun &;;
 		  /[Aa]juda|[Aa]juda|[Hh]elp|/[Hh]elp)ajuda_fun &;;
 		  /[Ss]tart|[Ss]tart|[Cc]omecar|/[Cc]omecar)ajuda_fun &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
