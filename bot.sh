@@ -72,35 +72,6 @@ local bot_retorno="$LINE\n"
 	return 0
 }
 
-ajuda_fun () {
-local bot_retorno="$LINE\n"
-         bot_retorno+="Ola Amigo\n"
-         bot_retorno+="Seja Bem Vindo ao BOT\n"
-         bot_retorno+="$LINE\n"
-         bot_retorno+="Aqui Esta a lista de Comandos Disponiveis\n"
-         bot_retorno+="$LINE\n"
-         bot_retorno+="COMANDOS\n"
-         bot_retorno+="/online usuarios online\n"
-         bot_retorno+="/useradd adicionar usuario\n"
-         [[ $(dpkg --get-selections|grep -w "openvpn"|head -1) ]] && [[ -e /etc/openvpn/openvpn-status.log ]] && bot_retorno+="/openadd criar arquivo openvpn\n"
-         bot_retorno+="/userdell remover usuario\n"
-         bot_retorno+="/info informacoes dos usuarios\n"
-         bot_retorno+="/infovps informacao do servidor\n"
-         bot_retorno+="/usuarios usuarios liberados no bot\n"
-         bot_retorno+="/lang Traduz um texto\n"
-         bot_retorno+="/scan faz um scan de subdominios\n"
-         bot_retorno+="/gerar gerador de payload\n"
-         bot_retorno+="/criptar Codifica e Decodifica um Texto\n"
-         bot_retorno+="/logar Usuario Senha libera o bot\n"
-	 bot_retorno+="/Key\n"
-	 bot_retorno+="/ID\n"
-         bot_retorno+="$LINE\n"
-	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "$(echo -e $bot_retorno)" \
-							--parse_mode markdown
-	return 0	
-}
-
 blockfun () {
 local bot_retorno="$LINE\n"
           bot_retorno+="Usted no tiene permitdo usar este bot\n"
@@ -140,6 +111,36 @@ local bot_retorno="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
+}
+
+ajuda_fun () {
+local bot_retorno="$LINE\n"
+         bot_retorno+="Ola Amigo\n"
+         bot_retorno+="Seja Bem Vindo ao BOT\n"
+         bot_retorno+="$LINE\n"
+         bot_retorno+="Aqui Esta a lista de Comandos Disponiveis\n"
+         bot_retorno+="$LINE\n"
+         bot_retorno+="COMANDOS\n"
+         bot_retorno+="/online usuarios online\n"
+         bot_retorno+="/useradd adicionar usuario\n"
+         [[ $(dpkg --get-selections|grep -w "openvpn"|head -1) ]] && [[ -e /etc/openvpn/openvpn-status.log ]] && bot_retorno+="/openadd criar arquivo openvpn\n"
+         bot_retorno+="/userdell remover usuario\n"
+         bot_retorno+="/info informacoes dos usuarios\n"
+         bot_retorno+="/infovps informacao do servidor\n"
+         bot_retorno+="/usuarios usuarios liberados no bot\n"
+         bot_retorno+="/lang Traduz um texto\n"
+         bot_retorno+="/scan faz um scan de subdominios\n"
+         bot_retorno+="/gerar gerador de payload\n"
+         bot_retorno+="/criptar Codifica e Decodifica um Texto\n"
+         bot_retorno+="/logar Usuario Senha libera o bot\n"
+	 bot_retorno+="/Key\n"
+	 bot_retorno+="/ID\n"
+	 bot_retorno+="/reboot\n"
+         bot_retorno+="$LINE\n"
+	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "$(echo -e $bot_retorno)" \
+							--parse_mode markdown
+	return 0	
 }
 
 # Ejecutando escucha del bot
