@@ -22,7 +22,9 @@ _ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
 _usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
 
 #info del sistema
+os_system () {
 system=$(echo $(cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/      //')) && echo $system|awk '{print $1, $2}'
+}
 
 # Importando API
 source ShellBot.sh
@@ -47,7 +49,7 @@ fi
 
 infovps () {
 local bot_retorno="$LINE\n"
-          bot_retorno+="S.O: $system\n"
+          bot_retorno+="S.O: $(os_system)\n"
 	  bot_retorno+="Su IP es: $(meu_ip)\n"
 	  bot_retorno+="$LINE\n"
 	  bot_retorno+="Ram: $ram1\n"
