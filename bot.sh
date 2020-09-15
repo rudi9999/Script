@@ -38,6 +38,26 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token"
 ShellBot.username
 
+addID_fun () {
+[[ $(cat ${CID}|grep "${1}") = "" ]] && {
+echo ${1} >> /etc/ADM-db/Control-ID
+local bot_retorno="$LINE\n"
+          bot_retorno+="ID agregado con exito\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+  } || {
+local bot_retorno="$LINE\n"
+          bot_retorno+="====ERROR====\n"
+          bot_retorno+="Este ID ya existe\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+  }
+}
+
 meu_ip () {
 if [[ -e /etc/MEUIPADM ]]; then
 echo "$(cat /etc/MEUIPADM)"
