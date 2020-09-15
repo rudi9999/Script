@@ -212,7 +212,7 @@ while true; do
 		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 		  /[Ii]nfosys)infosys_fun &;;
 		  /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
-		  /[Ll]istid|/[Ll]ist)addID_fun &;;
+		  /[Ll]istid|/[Ll]ist)listID_fun &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
 		  /*)invalido &;;
            esac
