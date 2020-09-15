@@ -91,7 +91,7 @@ reboot_fun () {
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
   } || {
-  ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text Reiniciando...
+  ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text 'Reiniciando+++...'
   sleep 2
   reboot
   }
