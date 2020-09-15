@@ -48,9 +48,20 @@ fi
 }
 
 reboot_fun () {
-ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text Reiniciando...
-sleep 2
-reboot
+  permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
+  [[ $(echo $permited|grep "${chatuser}") = "" ]] && {
+  local bot_retorno="$LINE\n"
+          bot_retorno+="No esta autorizado\n"
+          bot_retorno+="CONTACTA A @Rufu99\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+  } || {
+  ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text Reiniciando...
+  sleep 2
+  reboot
+  }
 }
 
 infovps () {
