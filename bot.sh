@@ -52,7 +52,7 @@ local bot_retorno="$LINE\n"
 }
 
 addID_fun () {
-[[ $(cat ${CID}|grep "${1}") = "" ]] && {
+[[ $(cat -n ${CID}|grep "${1}") = "" ]] && {
 echo ${1} >> /etc/ADM-db/Control-ID
 local bot_retorno="$LINE\n"
           bot_retorno+="ID agregado con exito\n"
