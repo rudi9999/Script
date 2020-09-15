@@ -40,7 +40,7 @@ ShellBot.init --token "$bot_token"
 ShellBot.username
 
 listID_fun () {
-lsid=$(nl -s "-" ${CID})
+lsid=$(nl -s "." ${CID})
 local bot_retorno="$LINE\n"
           bot_retorno+="Lista de id permitidos\n"
           bot_retorno+="$LINE\n"
