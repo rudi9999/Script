@@ -48,8 +48,7 @@ fi
 }
 
 verify_admin () {
-  permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
-  echo $permited
+  curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin"
 }
 
 reboot_fun () {
