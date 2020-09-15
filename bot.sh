@@ -176,7 +176,7 @@ while true; do
 		  /[Aa]juda|[Aa]juda|/[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omecar|/[Cc]omecar)ajuda_fun &;;
 		  /[Ii]nfovps|[Ii]nfovps)infovps &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
-		  *)if [[ ! -z $LIBERADOS ]] && [[ $(echo ${verify_admin}|grep -w "${chatuser}") ]]; then
+		  *)if [[ $(echo ${verify_admin}|grep -w "${chatuser}") ]]; then
              case ${comando[0]} in
 	     [Rr]eboot|/[Rr]eboot)reboot_fun &;;
              [Oo]nline|/[Oo]nline|[Oo]nlines|/[Oo]nlines)online_fun &;;
