@@ -71,6 +71,18 @@ local bot_retorno="$LINE\n"
   }
 }
 
+deleteID_fun () {
+delid=$(sed -n ${1}p ${CID})
+sed -i "${1}d" ${CID}
+local bot_retorno="$LINE\n"
+          bot_retorno+="ID eliminado con exito!\n"
+          bot_retorno+="ID: ${delid}\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+}
+
 meu_ip () {
 if [[ -e /etc/MEUIPADM ]]; then
 echo "$(cat /etc/MEUIPADM)"
@@ -216,6 +228,7 @@ while true; do
 		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 		  /[Ii]nfosys)infosys_fun &;;
 		  /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
+		  /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 		  /[Ll]istid|/[Ll]ist)listID_fun &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
 		  /*)invalido &;;
