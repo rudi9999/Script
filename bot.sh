@@ -44,7 +44,7 @@ lsid=$(cat -n ${CID})
 local bot_retorno="$LINE\n"
           bot_retorno+="Lista de id permitidos\n"
           bot_retorno+="$LINE\n"
-          bot_retorno+="$lsid\n"
+          bot_retorno+="${lsid}\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
@@ -53,7 +53,7 @@ local bot_retorno="$LINE\n"
 
 addID_fun () {
 [[ $(cat ${CID}|grep "${1}") = "" ]] && {
-echo -${1} >> ${CID}
+echo ${1} >> ${CID}
 local bot_retorno="$LINE\n"
           bot_retorno+="ID agregado con exito\n"
           bot_retorno+="$LINE\n"
