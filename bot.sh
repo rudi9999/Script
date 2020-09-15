@@ -65,7 +65,7 @@ reboot_fun () {
   }
 }
 
-infovps () {
+infosys () {
 local bot_retorno="$LINE\n"
           bot_retorno+="S.O: $(os_system)\n"
 	  bot_retorno+="Su IP es: $(meu_ip)\n"
@@ -140,21 +140,21 @@ local bot_retorno="$LINE\n"
 							--parse_mode markdown
 }
 
+invalido () {
+local bot_retorno="$LINE\n"
+         bot_retorno+="Comando invalido!\n"
+         bot_retorno+="$LINE\n"
+	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "$(echo -e $bot_retorno)" \
+							--parse_mode markdown
+	return 0	
+}
+
 ajuda_fun () {
 local bot_retorno="$LINE\n"
          bot_retorno+="COMANDOS\n"
-         bot_retorno+="/online usuarios online\n"
-         bot_retorno+="/useradd adicionar usuario\n"
-         [[ $(dpkg --get-selections|grep -w "openvpn"|head -1) ]] && [[ -e /etc/openvpn/openvpn-status.log ]] && bot_retorno+="/openadd criar arquivo openvpn\n"
-         bot_retorno+="/userdell remover usuario\n"
-         bot_retorno+="/info informacoes dos usuarios\n"
-         bot_retorno+="/infovps informacao do servidor\n"
-         bot_retorno+="/usuarios usuarios liberados no bot\n"
-         bot_retorno+="/lang Traduz um texto\n"
-         bot_retorno+="/scan faz um scan de subdominios\n"
-         bot_retorno+="/gerar gerador de payload\n"
-         bot_retorno+="/criptar Codifica e Decodifica um Texto\n"
-         bot_retorno+="/logar Usuario Senha libera o bot\n"
+         bot_retorno+="/infosys informacion del sistema\n"
+	 bot_retorno+="/addid\n"
 	 bot_retorno+="/Key\n"
 	 bot_retorno+="/ID\n"
 	 bot_retorno+="/reboot\n"
@@ -173,30 +173,14 @@ while true; do
 	    echo $chatuser >&2
 	    comando=(${message_text[$id]})
 	    case ${comando[0]} in
-	      /[Tt]este|[Tt]este)teste_fun &;;
-	      /[Ii]d|[Ii]d|/[Ii]D|[Ii]D)myid_fun &;;
-	      /[Kk]ey|[Kk]ey)key_fun &;;
-	      /[Rr]eboot|[Rr]eboot)reboot_fun &;;
-		  /[Aa]juda|[Aa]juda|/[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omecar|/[Cc]omecar)ajuda_fun &;;
-		  /[Ii]nfovps|[Ii]nfovps)infovps &;;
+	      /[Tt]este)teste_fun &;;
+	      /[Ii]d|/[Ii]D)myid_fun &;;
+	      /[Kk]ey)key_fun &;;
+	      /[Rr]eboot)reboot_fun &;;
+		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+		  /[Ii]nfosys)infovps &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
-		  *)if [[ ! -z $LIBERADOS ]] && [[ $(echo ${LIBERADOS}|grep -w "${chatuser}") ]]; then
-             case ${comando[0]} in
-             [Oo]nline|/[Oo]nline|[Oo]nlines|/[Oo]nlines)online_fun &;;
-             [Cc]riptar|/[Cc]riptar|[Cc]ript|/[Cc]ript)cript_fun "${comando[@]}" &;;
-             [Uu]seradd|/[Uu]seradd|[Aa]dd|/[Aa]dd)useradd_fun "${comando[1]}" "${comando[2]}" "${comando[3]}" "${comando[4]}" &;;
-             [Uu]serdell|/[Uu]serdell|[Dd]ell|/[Dd]ell)userdell_fun "${comando[1]}" &;;
-             [Ii]nfo|/[Ii]nfo)info_fun &;;
-             [Ll]ang|/[Ll]ang)language_fun "${comando[@]}" &;;
-             [Oo]penadd|/[Oo]penadd|[Oo]pen|/[Oo]pen)openadd_fun "${comando[1]}" "${comando[2]}" &;;
-             [Gg]erar|/[Gg]erar|[Pp]ay|/[Pp]ay)paygen_fun "${comando[1]}" "${comando[2]}" "${comando[3]}" &;;
-             [Uu]suarios|/[Uu]suarios|[Uu]ser|/[Uu]ser)loguin_fun &;;
-             [Ss]can|/[Ss]can)scan_fun "${comando[1]}" &;;
-             *)ajuda_fun;;
-             esac
-             else
-             [[ ! -z "${comando[0]}" ]] && blockfun &
-             fi;;
+		  /*)invalido &;;
            esac
     done
 done
