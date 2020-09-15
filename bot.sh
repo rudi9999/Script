@@ -65,7 +65,7 @@ reboot_fun () {
   }
 }
 
-infosys () {
+infosys_fun () {
 local bot_retorno="$LINE\n"
           bot_retorno+="S.O: $(os_system)\n"
 	  bot_retorno+="Su IP es: $(meu_ip)\n"
@@ -178,7 +178,7 @@ while true; do
 	      /[Kk]ey)key_fun &;;
 	      /[Rr]eboot)reboot_fun &;;
 		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
-		  /[Ii]nfosys)infovps &;;
+		  /[Ii]nfosys)infosys_fun &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
 		  /*)invalido &;;
            esac
