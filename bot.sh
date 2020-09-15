@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # verificacion primarias
+CIDdir=/etc/ADM-db && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
+CID="${CIDdir}/Control-ID" && [[ ! -e ${CID} ]] && wget -O ${CID} https://raw.githubusercontent.com/rudi9999/Script/master/Control-ID &> /dev/null
 [[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] || apt-get install jq -y &>/dev/null
 [[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/Install/ShellBot.sh &> /dev/null
 [[ -e /etc/texto-bot ]] && rm /etc/texto-bot
