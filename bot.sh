@@ -51,8 +51,7 @@ reboot_fun () {
   permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
   [[ $(echo $permited|grep "${chatuser}") = "" ]] && {
   local bot_retorno="$LINE\n"
-          bot_retorno+="No esta autorizado\n"
-          bot_retorno+="CONTACTA A @Rufu99\n"
+          bot_retorno+="Solo el administrador tiene acceso a este comando\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
