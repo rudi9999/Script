@@ -142,11 +142,6 @@ local bot_retorno="$LINE\n"
 
 ajuda_fun () {
 local bot_retorno="$LINE\n"
-         bot_retorno+="Ola Amigo\n"
-         bot_retorno+="Seja Bem Vindo ao BOT\n"
-         bot_retorno+="$LINE\n"
-         bot_retorno+="Aqui Esta a lista de Comandos Disponiveis\n"
-         bot_retorno+="$LINE\n"
          bot_retorno+="COMANDOS\n"
          bot_retorno+="/online usuarios online\n"
          bot_retorno+="/useradd adicionar usuario\n"
