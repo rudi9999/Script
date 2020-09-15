@@ -47,14 +47,20 @@ echo "$MEU_IP2" > /etc/MEUIPADM
 fi
 }
 
-verify_admin () {
-  curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin"
-}
-
 reboot_fun () {
+  permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
+  [[ $(echo $permited|grep "${chatuser}") = "" ]] && {
+  local bot_retorno="$LINE\n"
+          bot_retorno+="Solo el administrador tiene acceso a este comando\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+  } || {
   ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text Reiniciando...
   sleep 2
   reboot
+  }
 }
 
 infovps () {
@@ -173,12 +179,12 @@ while true; do
 	      /[Tt]este|[Tt]este)teste_fun &;;
 	      /[Ii]d|[Ii]d|/[Ii]D|[Ii]D)myid_fun &;;
 	      /[Kk]ey|[Kk]ey)key_fun &;;
+	      /[Rr]eboot|[Rr]eboot)reboot_fun &;;
 		  /[Aa]juda|[Aa]juda|/[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omecar|/[Cc]omecar)ajuda_fun &;;
 		  /[Ii]nfovps|[Ii]nfovps)infovps &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
-		  *)if [[ $(echo ${verify_admin}|grep -w "${chatuser}") ]]; then
+		  *)if [[ ! -z $LIBERADOS ]] && [[ $(echo ${LIBERADOS}|grep -w "${chatuser}") ]]; then
              case ${comando[0]} in
-	     [Rr]eboot|/[Rr]eboot)reboot_fun &;;
              [Oo]nline|/[Oo]nline|[Oo]nlines|/[Oo]nlines)online_fun &;;
              [Cc]riptar|/[Cc]riptar|[Cc]ript|/[Cc]ript)cript_fun "${comando[@]}" &;;
              [Uu]seradd|/[Uu]seradd|[Aa]dd|/[Aa]dd)useradd_fun "${comando[1]}" "${comando[2]}" "${comando[3]}" "${comando[4]}" &;;
