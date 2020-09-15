@@ -47,7 +47,7 @@ echo "$MEU_IP2" > /etc/MEUIPADM
 fi
 }
 
-reboot_fun () {
+verify_admin () {
   permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
   [[ $(echo $permited|grep "${chatuser}") = "" ]] && {
   local bot_retorno="$LINE\n"
@@ -56,11 +56,14 @@ reboot_fun () {
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
-  } || {
+  } 
+}
+
+reboot_fun () {
+  verify_admin
   ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text Reiniciando...
   sleep 2
   reboot
-  }
 }
 
 infovps () {
