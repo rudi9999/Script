@@ -40,7 +40,7 @@ ShellBot.init --token "$bot_token"
 ShellBot.username
 
 listID_fun () {
-lsid=$(cat ${CID})
+lsid=$(cat -n ${CID})
 local bot_retorno="$LINE\n"
           bot_retorno+="Lista de id permitidos\n"
           bot_retorno+="$LINE\n"
@@ -52,7 +52,7 @@ local bot_retorno="$LINE\n"
 }
 
 addID_fun () {
-[[ $(cat -n ${CID}|grep "${1}") = "" ]] && {
+[[ $(cat ${CID}|grep "${1}") = "" ]] && {
 echo ${1} >> /etc/ADM-db/Control-ID
 local bot_retorno="$LINE\n"
           bot_retorno+="ID agregado con exito\n"
