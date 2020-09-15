@@ -88,6 +88,7 @@ local bot_retorno="$LINE\n"
 }
 
 key_fun () {
+  unset permited
   permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-ID")
   [[ $(echo $permited|grep "${chatuser}") = "" ]] && {
   local bot_retorno="$LINE\n"
