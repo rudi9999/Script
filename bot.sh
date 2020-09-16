@@ -58,13 +58,17 @@ ShellBot.sendDocument --chat_id ${message_chat_id[$id]} --document /etc/ADM-db/C
 addID_fun () {
 [[ $(cat ${CID}|grep "${1}") = "" ]] && {
 echo "/${1}" >> ${CID}
+cp /etc/ADM-db/Control-ID $HOME/
 local bot_retorno="$LINE\n"
           bot_retorno+="ID agregado con exito\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
-document_fun
+local bot_retorno2
+          ShellBot.sendDocument --chat_id ${message_chat_id[$id]} \
+                             --document @$HOME/Control-ID
+rm $HOME/Control-ID
   } || {
 local bot_retorno="$LINE\n"
           bot_retorno+="====ERROR====\n"
