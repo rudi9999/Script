@@ -54,17 +54,13 @@ local bot_retorno="$LINE\n"
 addID_fun () {
 [[ $(cat ${CID}|grep "${1}") = "" ]] && {
 echo "/${1}" >> ${CID}
-cp ${CID} $HOME/
 local bot_retorno="$LINE\n"
           bot_retorno+="ID agregado con exito\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
-local bot_retorno2
-          ShellBot.sendDocument --chat_id ${message_chat_id[$id]} \
-                             --document @$HOME/Control-ID
-rm $HOME/Control-ID
+ID-db_fun
   } || {
 local bot_retorno="$LINE\n"
           bot_retorno+="====ERROR====\n"
@@ -86,6 +82,15 @@ local bot_retorno="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
+ID-db_fun
+}
+
+ID-db_fun () {
+cp ${CID} $HOME/
+local bot_retorno2
+          ShellBot.sendDocument --chat_id ${message_chat_id[$id]} \
+                             --document @$HOME/Control-ID
+rm $HOME/Control-ID
 }
 
 meu_ip () {
