@@ -36,7 +36,7 @@ source ShellBot.sh
 bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 
 # Inicializando el bot
-ShellBot.init --token "$bot_token" --monitor
+ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
 listID_fun () {
