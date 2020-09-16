@@ -52,7 +52,7 @@ local bot_retorno="$LINE\n"
 }
 
 document_fun () {
-ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --document /etc/ADM-db/Control-ID
+ShellBot.sendDocument --chat_id ${message_chat_id[$id]} --document /etc/ADM-db/Control-ID
 }
 
 addID_fun () {
