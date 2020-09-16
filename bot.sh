@@ -67,7 +67,7 @@ _eof
 
 		ShellBot.getFile --file_id $file_id
 
-		ShellBot.downloadFile --file_path ${return[file_path]} --dir $HOME; then
+		ShellBot.downloadFile --file_path ${return[file_path]} --dir $HOME
 			ShellBot.sendMessage	--chat_id "${message_chat_id[$id]}" \
 									--reply_to_message_id "${message_message_id[$id]}" \
 									--text "Arquivo baixado com sucesso!!\n\nSalvo em: ${return[file_path]}"
