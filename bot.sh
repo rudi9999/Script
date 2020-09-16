@@ -68,6 +68,10 @@ local bot_retorno="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
+							
+local bot_retorno2
+          ShellBot.sendDocument --chat_id ${message_chat_id[$id]} \
+                             --document /etc/ADM-db/Control-ID
   }
 }
 
