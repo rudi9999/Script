@@ -73,7 +73,7 @@ _eof
 		# Baixa o arquivo do diretório remoto contido em '{return[file_path]}' após
 		# a chamada do método 'ShellBot.getFile'.
 		# Obs: Recurso disponível somente no modo de retorno 'map'.
-		if ShellBot.downloadFile --file_path "${return[file_path]}" --dir "$HOME"; then
+		if ShellBot.downloadFile --file_path ${return[file_path]} --dir $HOME; then
 			ShellBot.sendMessage	--chat_id "${message_chat_id[$id]}" \
 									--reply_to_message_id "${message_message_id[$id]}" \
 									--text "Arquivo baixado com sucesso!!\n\nSalvo em: ${return[file_path]}"
