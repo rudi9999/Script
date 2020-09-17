@@ -52,7 +52,7 @@ local bot_retorno="$LINE\n"
 vie_fun () {
 lsidp=$(cat -n $HOME/prueva.txt)
 local bot_retorno="$LINE\n"
-          bot_retorno+="Lista de id permitidos\n"
+          bot_retorno+="Lista de key\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="${lsidp}\n"
           bot_retorno+="$LINE\n"
