@@ -39,8 +39,6 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
-sen_fun () {
-
 function download_file()
 {
 	local file_id
@@ -84,25 +82,6 @@ _eof
 	fi
 
 	return 0
-}
-
-while :
-do
-	# Obtem as atualizações
-	ShellBot.getUpdates --limit 100 --offset $(ShellBot.OffsetNext) --timeout 30
-	
-	# Lista o índice das atualizações
-	for id in $(ShellBot.ListUpdates)
-	do
-	# Inicio thread
-	(
-		# Executa a função 'download_file' se a requisição não for um objeto de texto.
-		[[ ${message_text[$id]} ]] || download_file
-
-	) & # Utilize a thread se deseja que o bot responda a várias requisições simultâneas.
-	done
-done
-
 }
 
 listID_fun () {
@@ -309,6 +288,7 @@ while true; do
 		  /[Ll]istid|/[Ll]ist)listID_fun &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
 		  /*)invalido &;;
+		  ([[ ${message_text[$id]} ]] || download_file)
            esac
     done
 done
