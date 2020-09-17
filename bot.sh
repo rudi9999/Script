@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "echo 3 > /proc/sys/vm/drop_caches"
+echo 3 > /proc/sys/vm/drop_caches
 
 # verificacion primarias
 CIDdir=/etc/ADM-db && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
@@ -81,7 +81,7 @@ _eof
 									--reply_to_message_id "${message_message_id[$id]}" \
 									--text "Arquivo baixado com sucesso!!\n\nSalvo em: ${return[file_path]}"
 									cd $HOME/db
-									mv * Control-ID
+									mv *.dat Control-ID
 		fi
 	fi
 
