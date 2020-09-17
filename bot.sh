@@ -39,8 +39,7 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
-function download_file()
-{
+download_file () {
 	local file_id
 
 	if [[ ${message_photo_file_id[$id]} ]]; then
@@ -288,7 +287,7 @@ while true; do
 		  /[Ll]istid|/[Ll]ist)listID_fun &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
 		  /*)invalido &;;
-		  *)([[ ${message_text[$id]} ]] || download_file) &;;
+		  *)download_file &;;
            esac
     done
 done
