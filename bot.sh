@@ -49,6 +49,18 @@ local bot_retorno="$LINE\n"
 							--parse_mode markdown
 }
 
+vie_fun () {
+lsidp=$(cat -n $HOME/prueva.txt)
+local bot_retorno="$LINE\n"
+          bot_retorno+="Lista de id permitidos\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="${lsidp}\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+}
+
 listID_fun () {
 lsid=$(cat -n ${CID})
 local bot_retorno="$LINE\n"
@@ -245,6 +257,7 @@ while true; do
 	      /[Ii]d|/[Ii]D)myid_fun &;;
 	      /[Kk]ey)key_fun &;;
 	      /[Kk]eys)keys_fun "${comando[1]}" &;;
+	      /[Vv]ie)vie_fun &;;
 	      /[Rr]eboot)reboot_fun &;;
 		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 		  /[Ii]nfosys)infosys_fun &;;
