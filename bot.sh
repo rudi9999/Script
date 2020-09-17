@@ -39,6 +39,16 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
+key2-fun () {
+echo "${1}" >> $HOME/prueva.txt
+local bot_retorno="$LINE\n"
+          bot_retorno+="prueva guardada\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+}
+
 listID_fun () {
 lsid=$(cat -n ${CID})
 local bot_retorno="$LINE\n"
@@ -234,6 +244,7 @@ while true; do
 	      /[Tt]este)teste_fun &;;
 	      /[Ii]d|/[Ii]D)myid_fun &;;
 	      /[Kk]ey)key_fun &;;
+	      /[Kk]ey2)key2_fun "${comando[1]}" &;;
 	      /[Rr]eboot)reboot_fun &;;
 		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 		  /[Ii]nfosys)infosys_fun &;;
