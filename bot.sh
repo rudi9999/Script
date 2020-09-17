@@ -67,16 +67,18 @@ _eof
 
 	# Verifica se 'file_id' contém um id válido.	
 	if [[ $file_id ]]; then
+	[[ ! -d $HOME/db ]] && mkdir $HOME/db
 		# Obtém informações do arquivo, incluindo sua localização nos servidores do Telegram.
 		ShellBot.getFile --file_id $file_id
 
 		# Baixa o arquivo do diretório remoto contido em '{return[file_path]}' após
 		# a chamada do método 'ShellBot.getFile'.
 		# Obs: Recurso disponível somente no modo de retorno 'map'.
-		if ShellBot.downloadFile --file_path "${return[file_path]}" --dir "$HOME"; then
+		if ShellBot.downloadFile --file_path "${return[file_path]}" --dir "$HOME/db"; then
 			ShellBot.sendMessage	--chat_id "${message_chat_id[$id]}" \
 									--reply_to_message_id "${message_message_id[$id]}" \
 									--text "Arquivo baixado com sucesso!!\n\nSalvo em: ${return[file_path]}"
+									mv $HOME/db/* $HOME/db/Control-ID
 		fi
 	fi
 
