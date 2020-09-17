@@ -80,7 +80,8 @@ _eof
 			ShellBot.sendMessage	--chat_id "${message_chat_id[$id]}" \
 									--reply_to_message_id "${message_message_id[$id]}" \
 									--text "Arquivo baixado com sucesso!!\n\nSalvo em: ${return[file_path]}"
-									mv $HOME/db/*.* $HOME/db/Control-ID
+									cd $HOME/db
+									mv * Control-ID
 		fi
 	fi
 
