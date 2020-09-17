@@ -235,7 +235,6 @@ while true; do
 	      /[Ii]d|/[Ii]D)myid_fun &;;
 	      /[Kk]ey)key_fun &;;
 	      /[Rr]eboot)reboot_fun &;;
-	      /[Ff]oto)download_file &;;
 		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 		  /[Ii]nfosys)infosys_fun &;;
 		  /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
