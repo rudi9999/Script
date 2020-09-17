@@ -39,7 +39,7 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
-key2-fun () {
+key2_fun () {
 echo "${1}" >> $HOME/prueva.txt
 local bot_retorno="$LINE\n"
           bot_retorno+="prueva guardada\n"
