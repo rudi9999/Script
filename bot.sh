@@ -39,7 +39,7 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
-key2_fun () {
+keys_fun () {
 echo "${1}" >> $HOME/prueva.txt
 local bot_retorno="$LINE\n"
           bot_retorno+="prueva guardada\n"
@@ -244,7 +244,7 @@ while true; do
 	      /[Tt]este)teste_fun &;;
 	      /[Ii]d|/[Ii]D)myid_fun &;;
 	      /[Kk]ey)key_fun &;;
-	      /[Kk]ey2)key2_fun "${comando[1]}" &;;
+	      /[Kk]eys)keys_fun "${comando[1]}" &;;
 	      /[Rr]eboot)reboot_fun &;;
 		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 		  /[Ii]nfosys)infosys_fun &;;
