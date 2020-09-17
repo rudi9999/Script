@@ -40,32 +40,7 @@ ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
 download_file () {
-	local file_id
-
-	if [[ ${message_photo_file_id[$id]} ]]; then
-		# Em alguns arquivos de imagem o telegram aplica uma escala de tamanho
-		# gerando id's para diferentes resoluções da mesma iagem. São elas (baixa, média, alta).
-		# Os id's são armazenados e separados pelo delimitador '|' (padrão).
-		#
-		# Exemplo:
-		#     baixa_id|media_id|alta_id
-		
-		# Extrai o id da imagem com melhor resolução.
-		file_id=${message_photo_file_id[$id]##*|}
-	else 
-		# Outros objetos.
-		# Extrai o id do objeto da mensagem.
-		# document, audio, sticker, voice
-		file_id=$(cat << _eof
-${message_document_file_id[$id]}
-${message_audio_file_id[$id]}
-${message_sticker_file_id[$id]}
-${message_voice_file_id[$id]}
-_eof
-)
-	fi
-
-		ShellBot.getFile --file_id $file_id
+		ShellBot.getFile --file_id ${message_document_file_id[$id]}
 
 		ShellBot.downloadFile --file_path ${return[file_path]} --dir $HOME
 			ShellBot.sendMessage	--chat_id "${message_chat_id[$id]}" \
