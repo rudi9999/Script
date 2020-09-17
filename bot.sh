@@ -50,8 +50,8 @@ local bot_retorno="$LINE\n"
 }
 
 vie_fun () {
-lsidp=$(cat -n $HOME/prueva.txt)
-ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text ${lsidp}
+lsidp=$(cat $HOME/prueva.txt)
+ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text $lsidp
 }
 
 listID_fun () {
