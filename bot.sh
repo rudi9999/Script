@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "echo 3 > /proc/sys/vm/drop_caches"
+
 # verificacion primarias
 CIDdir=/etc/ADM-db && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
 CID="${CIDdir}/Control-ID" && [[ ! -e ${CID} ]] && wget -O ${CID} https://raw.githubusercontent.com/rudi9999/Script/master/Control-ID &> /dev/null
