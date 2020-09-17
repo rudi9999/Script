@@ -288,7 +288,7 @@ while true; do
 		  /[Ll]istid|/[Ll]ist)listID_fun &;;
 		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
 		  /*)invalido &;;
-		  ([[ ${message_text[$id]} ]] || download_file)
+		  *)([[ ${message_text[$id]} ]] || download_file) &;;
            esac
     done
 done
