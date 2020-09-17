@@ -38,7 +38,7 @@ source ShellBot.sh
 bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 
 # Inicializando el bot
-ShellBot.init --token "$bot_token" --monitor --return map
+ShellBot.init --token "$bot_token"
 ShellBot.username
 
 download_file () {
@@ -80,12 +80,13 @@ _eof
 			ShellBot.sendMessage	--chat_id "${message_chat_id[$id]}" \
 									--reply_to_message_id "${message_message_id[$id]}" \
 									--text "Arquivo baixado com sucesso!!\n\nSalvo em: ${return[file_path]}"
-									cd $HOME/db
-									mv *.dat Control-ID
+
 		fi
 	fi
 
 	return 0
+cd $HOME/db
+mv *.dat Control-ID
 }
 
 listID_fun () {
