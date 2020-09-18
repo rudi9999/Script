@@ -51,7 +51,7 @@ local bot_retorno="====================\n"
           bot_retorno+="SU ID: ${chatuser}\n"
           bot_retorno+="====================\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "<s>$(echo -e $bot_retorno)</s>" \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
 							--parse_mode html
 }
 
@@ -123,7 +123,7 @@ bot_retorno+="$LINE\n"
 bot_retorno+="${keyfinal}\n"
 bot_retorno+="$LINE\n"
 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
---text "<s>$(echo -e $bot_retorno)</s>" \
+--text "<b>$(echo -e $bot_retorno)</b>" \
 --parse_mode html
 }
 
