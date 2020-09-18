@@ -108,7 +108,6 @@ valuekey="$(date | md5sum | head -c10)"
 valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
 fun_list "$valuekey"
 keyfinal=$(ofus "$IP:8888/$valuekey/$LIST")
-echo $keyfinal > $HOME/key1
 local bot_retorno="$LINE\n"
 bot_retorno+="Key Generada Con Exito!\n"
 bot_retorno+="$LINE\n"
@@ -221,21 +220,10 @@ local bot_retorno2
 rm $HOME/Control-ID
 }
 
-meu_ipe () {
+meu_ip () {
 MIP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 MIP2=$(wget -qO- ipv4.icanhazip.com)
-[[ "$MIP" != "$MIP2" ]] && IP="$MIP2" || IP="$MIP"
-}
-
-meu_ip () {
-#if [[ -e /etc/MEUIPADM ]]; then
-#echo "$(cat /etc/MEUIPADM)"
-#else
-MEU_IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-MEU_IP2=$(wget -qO- ipv4.icanhazip.com)
-[[ "$MEU_IP" != "$MEU_IP2" ]] && echo "$MEU_IP2" || echo "$MEU_IP"
-#echo "$MEU_IP2" > /etc/MEUIPADM
-#fi
+[[ "$MIP" != "$MIP2" ]] && echo "$MIP2" || echo "$MIP"
 }
 
 reboot_fun () {
