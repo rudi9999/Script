@@ -103,7 +103,7 @@ echo "$nombrevalue" > ${DIR}/${KEY}.name
 }
 
 gerar_key () {
-meu_ip
+meu_ip_fun
 valuekey="$(date | md5sum | head -c10)"
 valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
 fun_list "$valuekey"
@@ -218,6 +218,12 @@ local bot_retorno2
           ShellBot.sendDocument --chat_id ${message_chat_id[$id]} \
                              --document @$HOME/Control-ID
 rm $HOME/Control-ID
+}
+
+meu_ip_fun () {
+MIP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+MIP2=$(wget -qO- ipv4.icanhazip.com)
+[[ "$MIP" != "$MIP2" ]] && IP="$MIP2" || IP="$MIP"
 }
 
 meu_ip () {
