@@ -369,7 +369,7 @@ while true; do
 	    case ${comando[0]} in
 	      /[Tt]este)teste_fun &;;
 	      /[Ii]d|/[Ii]D)myid_fun &;;
-	      /[Kk]ey)key_fun &;;
+	      /[Kk]ey)gerar_key &;;
 	      /[Vv]ie)sen_fun &;;
 	      /[Rr]eboot)reboot_fun &;;
 		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
