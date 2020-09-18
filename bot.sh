@@ -46,6 +46,15 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
+myid_fun () {
+local bot_retorno="====================\n"
+          bot_retorno+="<b>SU ID: </b>${chatuser}\n"
+          bot_retorno+="====================\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "_$(echo -e $bot_retorno)_" \
+							--parse_mode markdown
+}
+
 ofus () {
 unset server
 server=$(echo ${txt_ofuscatw}|cut -d':' -f1)
@@ -301,15 +310,6 @@ key_fun () {
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
   }
-}
-
-myid_fun () {
-local bot_retorno="====================\n"
-          bot_retorno+=<b>"SU ID: </b>${chatuser}\n"
-          bot_retorno+="====================\n"
-	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
 }
 
 teste_fun () {
