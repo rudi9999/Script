@@ -103,6 +103,7 @@ echo "$nombrevalue" > ${DIR}/${KEY}.name
 }
 
 gerar_key () {
+meu_ip
 valuekey="$(date | md5sum | head -c10)"
 valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
 fun_list "$valuekey"
