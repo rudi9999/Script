@@ -110,15 +110,14 @@ valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
 fun_list "$valuekey"
 keyfinal=$(ofus "$IP:8888/$valuekey/$LIST")
 
-  local bot_retorno="$LINE\n"
-        bot_retorno+=">>>>>Key Generada Con Exito!<<<<<\n"
-        bot_retorno+="$LINE\n"
-        bot_retorno+="$keyfinal\n"
-        bot_retorno+="$LINE\n"
-            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "_$(echo -e $bot_retorno)_" \
-                --parse_mode markdown
-
+local bot_retorno="$LINE\n"
+bot_retorno+="Key Generada Con Exito!\n"
+bot_retorno+="$LINE\n"
+bot_retorno+="${keyfinal}\n"
+bot_retorno+="$LINE\n"
+ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+--text "_$(echo -e $bot_retorno)_" \
+--parse_mode markdown
 }
 
 download_file () {
