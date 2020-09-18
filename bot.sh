@@ -308,7 +308,7 @@ local bot_retorno="====================\n"
           bot_retorno+="SU ID: ${chatuser}\n"
           bot_retorno+="====================\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text <font color="red">"_$(echo -e $bot_retorno)_"</font> \
+							--text "_$(echo -e <font color="red">$bot_retorno</font>)_" \
 							--parse_mode markdown
 }
 
