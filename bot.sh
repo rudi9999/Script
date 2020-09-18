@@ -3,6 +3,13 @@
 echo 3 > /proc/sys/vm/drop_caches
 
 # verificacion primarias
+[[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="ADMbot.sh C-SSR.sh Crear-Demo.sh PDirect.py PGet.py POpen.py PPriv.py PPub.py Shadowsocks-R.sh Shadowsocks-libev.sh Unlock-Pass-VULTR.sh apacheon.sh blockBT.sh budp.sh dns-netflix.sh   dropbear.sh fai2ban.sh gestor.sh menu message.txt openvpn.sh paysnd.sh ports.sh shadowsocks.sh sockspy.sh speed.sh speedtest.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost usercodes utils.sh v2ray.sh"
+SCPT_DIR="/etc/SCRIPT"
+[[ ! -e ${SCPT_DIR} ]] && mkdir ${SCPT_DIR}
+INSTA_ARQUIVOS="ADMVPS.zip"
+DIR="/etc/http-shell"
+LIST="lista-arq"
+
 CIDdir=/etc/ADM-db && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
 CID="${CIDdir}/Control-ID" && [[ ! -e ${CID} ]] && wget -O ${CID} https://raw.githubusercontent.com/rudi9999/Script/master/Control-ID &> /dev/null
 [[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] || apt-get install jq -y &>/dev/null
@@ -40,6 +47,79 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 # Inicializando el bot
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
+
+ofus () {
+unset server
+server=$(echo ${txt_ofuscatw}|cut -d':' -f1)
+unset txtofus
+number=$(expr length $1)
+for((i=1; i<$number+1; i++)); do
+txt[$i]=$(echo "$1" | cut -b $i)
+case ${txt[$i]} in
+".")txt[$i]="+";;
+"+")txt[$i]=".";;
+"1")txt[$i]="@";;
+"@")txt[$i]="1";;
+"2")txt[$i]="?";;
+"?")txt[$i]="2";;
+"4")txt[$i]="%";;
+"%")txt[$i]="4";;
+"-")txt[$i]="K";;
+"K")txt[$i]="-";;
+esac
+txtofus+="${txt[$i]}"
+done
+echo "$txtofus" | rev
+}
+
+fun_list () {
+rm ${SCPT_DIR}/*.x.c &> /dev/null
+unset KEY
+KEY="$1"
+#CRIA DIR
+[[ ! -e ${DIR} ]] && mkdir ${DIR}
+#ENVIA ARQS
+i=0
+VALUE+="gerar.sh instgerador.sh http-server.py lista-arq $BASICINST"
+for arqx in `ls ${SCPT_DIR}`; do
+[[ $(echo $VALUE|grep -w "${arqx}") ]] && continue 
+echo -e "[$i] -> ${arqx}"
+arq_list[$i]="${arqx}"
+let i++
+done
+clear
+#CRIA KEY
+[[ ! -e ${DIR}/${KEY} ]] && mkdir ${DIR}/${KEY}
+#PASSA ARQS
+nombrevalue="${chatuser}"
+#ADM BASIC
+arqslist="$BASICINST"
+for arqx in `echo "${arqslist}"`; do
+[[ -e ${DIR}/${KEY}/$arqx ]] && continue #ANULA ARQUIVO CASO EXISTA
+cp ${SCPT_DIR}/$arqx ${DIR}/${KEY}/
+echo "$arqx" >> ${DIR}/${KEY}/${LIST}
+done
+rm ${SCPT_DIR}/*.x.c &> /dev/null
+echo "$nombrevalue" > ${DIR}/${KEY}.name
+[[ ! -z $IPFIX ]] && echo "$IPFIX" > ${DIR}/${KEY}/keyfixa
+}
+
+gerar_key () {
+valuekey="$(date | md5sum | head -c10)"
+valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
+fun_list "$valuekey"
+keyfinal=$(ofus "$IP:8888/$valuekey/$LIST")
+
+  local bot_retorno="$LINE\n"
+        bot_retorno+=">>>>>Key Generada Con Exito!<<<<<\n"
+        bot_retorno+="$LINE\n"
+        bot_retorno+="$keyfinal\n"
+        bot_retorno+="$LINE\n"
+            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+                --text "_$(echo -e $bot_retorno)_" \
+                --parse_mode markdown
+
+}
 
 download_file () {
 	local file_id
