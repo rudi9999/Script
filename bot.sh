@@ -123,8 +123,8 @@ bot_retorno+="$LINE\n"
 bot_retorno+="${keyfinal}\n"
 bot_retorno+="$LINE\n"
 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
---text "_$(echo -e $bot_retorno)_" \
---parse_mode markdown
+--text "<i>$(echo -e $bot_retorno)</i>" \
+--parse_mode html
 }
 
 download_file () {
