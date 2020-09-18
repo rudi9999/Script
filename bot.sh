@@ -51,8 +51,8 @@ local bot_retorno="====================\n"
           bot_retorno+="SU ID: ${chatuser}\n"
           bot_retorno+="====================\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "*$(echo -e $bot_retorno)*" \
-							--parse_mode markdown
+							--text "<s>$(echo -e $bot_retorno)</s>" \
+							--parse_mode html
 }
 
 ofus () {
