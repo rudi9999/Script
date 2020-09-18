@@ -257,7 +257,7 @@ reboot_fun () {
 infosys_fun () {
 local bot_retorno="$LINE\n"
           bot_retorno+="S.O: $(os_system)\n"
-	  bot_retorno+="Su IP es: $(meu_ipe)\n"
+	  bot_retorno+="Su IP es: $(meu_ip)\n"
 	  bot_retorno+="$LINE\n"
 	  bot_retorno+="Ram: $ram1\n"
 	  bot_retorno+="USADA: $ram3\n"
