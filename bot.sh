@@ -58,8 +58,9 @@ while true; do
 	      /[Ii]d|/[Ii]D)myid_fun &;;
 	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 	      *)if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
-	      invalido
+	      invalido &;;
 	      else
+	      case ${comando[0]} in
 	      /[Kk]eygen)gerar_key &;;
 	      /[Rr]eboot)reboot_fun &;;
 	      /[Ii]nfosys)infosys_fun &;;
@@ -67,6 +68,7 @@ while true; do
 	      /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 	      /[Ll]istid|/[Ll]ist)listID_fun &;;
 	      *)download_file &;;
+	      esac
 	      fi;;
            esac
     done
