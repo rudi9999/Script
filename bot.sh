@@ -46,6 +46,32 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
+# Ejecutando escucha del bot
+while true; do
+    ShellBot.getUpdates --limit 100 --offset $(ShellBot.OffsetNext) --timeout 30
+    for id in $(ShellBot.ListUpdates); do
+	    chatuser="$(echo ${message_chat_id[$id]}|cut -d'-' -f2)"
+	    echo $chatuser >&2
+	    comando=(${message_text[$id]})
+	    case ${comando[0]} in
+	      /[Tt]este)teste_fun &;;
+	      /[Ii]d|/[Ii]D)myid_fun &;;
+	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+	      *)if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
+	      invalido
+	      else
+	      /[Kk]eygen)gerar_key &;;
+	      /[Rr]eboot)reboot_fun &;;
+	      /[Ii]nfosys)infosys_fun &;;
+	      /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
+	      /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
+	      /[Ll]istid|/[Ll]ist)listID_fun &;;
+	      *)download_file &;;
+	      fi;;
+           esac
+    done
+done
+
 ofus () {
 unset server
 server=$(echo ${txt_ofuscatw}|cut -d':' -f1)
@@ -350,29 +376,3 @@ local bot_retorno="$LINE\n"
 							--parse_mode markdown
 	return 0	
 }
-
-# Ejecutando escucha del bot
-while true; do
-    ShellBot.getUpdates --limit 100 --offset $(ShellBot.OffsetNext) --timeout 30
-    for id in $(ShellBot.ListUpdates); do
-	    chatuser="$(echo ${message_chat_id[$id]}|cut -d'-' -f2)"
-	    echo $chatuser >&2
-	    comando=(${message_text[$id]})
-	    case ${comando[0]} in
-	      /[Tt]este)teste_fun &;;
-	      /[Ii]d|/[Ii]D)myid_fun &;;
-	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
-	      *)if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
-	      /[*]|[*])invalido &;;
-	      else
-	      /[Kk]eygen)gerar_key &;;
-	      /[Rr]eboot)reboot_fun &;;
-	      /[Ii]nfosys)infosys_fun &;;
-	      /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
-	      /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
-	      /[Ll]istid|/[Ll]ist)listID_fun &;;
-	      *)download_file &;;
-	      fi;;
-           esac
-    done
-done
