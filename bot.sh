@@ -58,7 +58,7 @@ while true; do
 	      /[Ii]d|/[Ii]D)myid_fun &;;
 	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 	      *)if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
-	      invalido &;;
+	      invalido &
 	      else
 	      case ${comando[0]} in
 	      /[Kk]eygen)gerar_key &;;
