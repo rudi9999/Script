@@ -363,7 +363,7 @@ local bot_retorno="$LINE\n"
          bot_retorno+="$LINE\n"
 	 fi
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "$(echo -e $bot_retorno)" \
+							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
 	return 0	
 }
