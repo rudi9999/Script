@@ -46,15 +46,6 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
 
-myid_fun () {
-local bot_retorno="====================\n"
-          bot_retorno+="SU ID: ${chatuser}\n"
-          bot_retorno+="====================\n"
-	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "<i>$(echo -e $bot_retorno)</i>" \
-							--parse_mode html
-}
-
 ofus () {
 unset server
 server=$(echo ${txt_ofuscatw}|cut -d':' -f1)
@@ -229,6 +220,15 @@ local bot_retorno2
 rm $HOME/Control-ID
 }
 
+myid_fun () {
+local bot_retorno="====================\n"
+          bot_retorno+="SU ID: ${chatuser}\n"
+          bot_retorno+="====================\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "<b>$(echo -e $bot_retorno)</b>" \
+							--parse_mode html
+}
+
 meu_ip_fun () {
 MIP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 MIP2=$(wget -qO- ipv4.icanhazip.com)
@@ -327,8 +327,8 @@ local bot_retorno="$LINE\n"
          bot_retorno+="Comando invalido!\n"
          bot_retorno+="$LINE\n"
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "$(echo -e $bot_retorno)" \
-							--parse_mode markdown
+							--text "<b>$(echo -e $bot_retorno)</b>" \
+							--parse_mode html
 	return 0	
 }
 
@@ -337,7 +337,7 @@ local bot_retorno="$LINE\n"
          bot_retorno+="COMANDOS\n"
          bot_retorno+="/infosys (informacion del sistema)\n"
 	 bot_retorno+="/ID (muestra sus ID)\n"
-	 bot_retorno+="/Key (requiere permisos)\n"
+	 bot_retorno+="/Keygen (requiere permisos)\n"
 	 bot_retorno+="$LINE\n"
 	 bot_retorno+="Comandos solo admin\n"
 	 bot_retorno+="/addid (añadir nuevas ID)\n"
@@ -361,17 +361,15 @@ while true; do
 	    case ${comando[0]} in
 	      /[Tt]este)teste_fun &;;
 	      /[Ii]d|/[Ii]D)myid_fun &;;
-	      /[Kk]ey)gerar_key &;;
-	      /[Vv]ie)sen_fun &;;
+	      /[Kk]eygen)gerar_key &;;
 	      /[Rr]eboot)reboot_fun &;;
-		  /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
-		  /[Ii]nfosys)infosys_fun &;;
-		  /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
-		  /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
-		  /[Ll]istid|/[Ll]ist)listID_fun &;;
-		  /[Ll]ogar|[Ll]ogar|[Ll]oguin|/[Ll]oguin)ativarid_fun "${comando[1]}" "${comando[2]}" "$chatuser";;
-		  /*)invalido &;;
-		  *)download_file &;;
+	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+	      /[Ii]nfosys)infosys_fun &;;
+	      /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
+	      /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
+	      /[Ll]istid|/[Ll]ist)listID_fun &;;
+	      /*)invalido &;;
+	      *)download_file &;;
            esac
     done
 done
