@@ -362,9 +362,9 @@ while true; do
 	      /[Tt]este)teste_fun &;;
 	      /[Ii]d|/[Ii]D)myid_fun &;;
 	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
-	      [[ $(cat ${CID}|grep "${chatuser}") = "" ]] && {
-	      /*)invalido &;;
-	      } || {
+	      *)if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
+	      /[*]|[*])invalido &;;
+	      else
 	      /[Kk]eygen)gerar_key &;;
 	      /[Rr]eboot)reboot_fun &;;
 	      /[Ii]nfosys)infosys_fun &;;
@@ -372,7 +372,7 @@ while true; do
 	      /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 	      /[Ll]istid|/[Ll]ist)listID_fun &;;
 	      *)download_file &;;
-	      }
+	      fi;;
            esac
     done
 done
