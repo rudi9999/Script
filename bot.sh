@@ -187,6 +187,13 @@ local bot_retorno="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "_$(echo -e $bot_retorno)_" \
 							--parse_mode markdown
+local bot_retor="$LINE\n"
+          bot_retor+="El Administrador\n"
+	  bot_retor+="ya puedes generar tus key\n"
+	  bot_retor+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${1} \
+							--text "_$(echo -e $bot_retor)_" \
+							--parse_mode markdown
 ID-db_fun
   } || {
 local bot_retorno="$LINE\n"
