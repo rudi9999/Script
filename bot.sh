@@ -342,12 +342,18 @@ local bot_retorno="$LINE\n"
 ajuda_fun () {
 permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
 local bot_retorno="$LINE\n"
+	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
          bot_retorno+="COMANDOS\n"
 	 bot_retorno+="/ayuda (muestra este menu)\n"
 	 bot_retorno+="/ID (muestra sus ID)\n"
 	 bot_retorno+="/Keygen (requiere permisos)\n"
 	 bot_retorno+="$LINE\n"
-	 if [[ ! -e $(echo $permited|grep "${chatuser}") = "" ]]; then
+	 else
+         bot_retorno+="COMANDOS\n"
+	 bot_retorno+="/ayuda (muestra este menu)\n"
+	 bot_retorno+="/ID (muestra sus ID)\n"
+	 bot_retorno+="/Keygen (requiere permisos)\n"
+	 bot_retorno+="$LINE\n"
 	 bot_retorno+="Comandos solo admin\n"
          bot_retorno+="/infosys (informacion del sistema)\n"
 	 bot_retorno+="/addid (añadir nuevas ID)\n"
