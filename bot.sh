@@ -361,15 +361,18 @@ while true; do
 	    case ${comando[0]} in
 	      /[Tt]este)teste_fun &;;
 	      /[Ii]d|/[Ii]D)myid_fun &;;
+	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+	      [[ $(cat ${CID}|grep "${chatuser}") = "" ]] && {
+	      /*)invalido &;;
+	      } || {
 	      /[Kk]eygen)gerar_key &;;
 	      /[Rr]eboot)reboot_fun &;;
-	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 	      /[Ii]nfosys)infosys_fun &;;
 	      /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
 	      /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 	      /[Ll]istid|/[Ll]ist)listID_fun &;;
-	      /*)invalido &;;
 	      *)download_file &;;
+	      }
            esac
     done
 done
