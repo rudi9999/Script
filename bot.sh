@@ -346,7 +346,7 @@ local bot_retorno="$LINE\n"
          bot_retorno+="COMANDOS\n"
 	 bot_retorno+="/ayuda (muestra este menu)\n"
 	 bot_retorno+="/ID (muestra sus ID)\n"
-	 [[ $(cat ${CID}|grep "${chatuser}") ]] && bot_retorno+="/Keygen (requiere permisos)\n"
+	 [[ $(cat ${CID}|grep "${chatuser}") = "" ]] && bot_retorno+="/Keygen (requiere permisos)\n"
 	 bot_retorno+="$LINE\n"
 	 else
          bot_retorno+="COMANDOS\n"
