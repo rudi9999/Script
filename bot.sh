@@ -291,7 +291,44 @@ local bot_retorno="$LINE\n"
 	return 0	
 }
 
-ajuda_fun () {
+ayuda_fun () {
+local bot_retorno="===========AYUDA===========\n"
+	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
+		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
+			 bot_retorno+="COMANDOS\n"
+			 bot_retorno+="/ID (muestra sus ID)\n"
+			 bot_retorno+="/menu\n"
+			 bot_retorno+="/ayuda (muestra este menu)\n"
+			 bot_retorno+="$LINE\n"
+		 else
+			 bot_retorno+="COMANDOS\n"
+			 bot_retorno+="/ID (muestra sus ID)\n"
+			 bot_retorno+="/Keygen (genera una key)\n"
+			 bot_retorno+="/menu\n"
+			 bot_retorno+="/ayuda (muestra este menu)\n"
+			 bot_retorno+="$LINE\n"
+		 fi
+	 else
+		 bot_retorno+="/infosys\n muestra informacion del sistema\n Ram, Cpu, Fecha y Hora\n"
+		 bot_retorno+="$LINE\n"
+		 bot_retorno+="/ID\n muestra sus ID de telegram\n para tener acceso al comando /keygen\n deve enviar su ID al admin)\n"
+		 bot_retorno+="$LINE\n"
+		 bot_retorno+="/add [id](añadir nuevas ID)\n"
+		 bot_retorno+="/del [id](quitar un ID)\n"
+		 bot_retorno+="/list (lista de ID permitidas)\n"
+		 bot_retorno+="/Keygen (genera una key)\n"
+		 bot_retorno+="/reboot (Reinicia el servidor vps)\n"
+		 bot_retorno+="/menu\n"
+		 bot_retorno+="/ayuda (muestra este menu)\n"
+		 bot_retorno+="$LINE\n"
+	 fi
+	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
+	return 0	
+}
+
+menu_fun () {
 local bot_retorno="$LINE\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
@@ -340,12 +377,13 @@ while true; do
 			 case ${comando[0]} in
 				 /[Ii]d|/[Ii]D)myid_fun &;;
 				 /[Mm]enu|[Mm]enu|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)menu_fun &;;
-				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ayuda_fun &;;
+				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_fun &;;
 				 *)invalido &;;
 			 esac
 		 else
 			 case ${comando[0]} in
-				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+				 /[Mm]enu|[Mm]enu|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)menu_fun &;;
+				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_fun &;;
 				 /[Ii]d|/[Ii]D)myid_fun &;;
 				 /[Kk]eygen)gerar_key &;;
 				 *)invalido &;;
@@ -353,7 +391,8 @@ while true; do
 		 fi
 	    else
 		 case ${comando[0]} in
-			 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+			 /[Mm]enu|[Mm]enu|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)menu_fun &;;
+			 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_fun &;;
 			 /[Ii]d|/[Ii]D)myid_fun &;;
 			 /[Kk]eygen)gerar_key &;;
 			 /[Ii]nfosys)infosys_fun &;;
