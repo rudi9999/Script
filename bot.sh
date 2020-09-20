@@ -382,23 +382,36 @@ while true; do
 	    chatuser="$(echo ${message_chat_id[$id]}|cut -d'-' -f2)"
 	    echo $chatuser >&2
 	    comando=(${message_text[$id]})
-	    case ${comando[0]} in
-	      /[Tt]este)teste_fun &;;
-	      /[Ii]d|/[Ii]D)myid_fun &;;
-	      /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
-	      *)if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
-	      invalido &
-	      else
-	      case ${comando[0]} in
-	      /[Kk]eygen)gerar_key &;;
-	      /[Rr]eboot)reboot_fun &;;
-	      /[Ii]nfosys)infosys_fun &;;
-	      /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
-	      /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
-	      /[Ll]istid|/[Ll]ist)listID_fun &;;
-	      *)download_file &;;
-	      esac
-	      fi;;
-           esac
+	    permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
+	    if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
+		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
+			 case ${comando[0]} in
+				 /[Tt]este)teste_fun &;;
+				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+				 /[Ii]d|/[Ii]D)myid_fun &;;
+			 esac
+		 else
+			 case ${comando[0]} in
+				 /[Tt]este)teste_fun &;;
+				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+				 /[Ii]d|/[Ii]D)myid_fun &;;
+				 /[Kk]eygen)gerar_key &;;
+			 esac
+		 fi
+	    else
+		 case ${comando[0]} in
+			 /[Tt]este)teste_fun &;;
+			 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
+			 /[Ii]d|/[Ii]D)myid_fun &;;
+			 /[Kk]eygen)gerar_key &;;
+			 /[Ii]nfosys)infosys_fun &;;
+			 /[Ll]istid|/[Ll]ist)listID_fun &;;
+			 /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
+			 /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
+			 /[Rr]eboot)reboot_fun &;;
+			 *)download_file &;;
+			 /*)invalido &;;
+		 esac
+	    fi
     done
 done
