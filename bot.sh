@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # verificacion primarias
-[[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="ADMbot.sh C-SSR.sh Crear-Demo.sh PDirect.py PGet.py POpen.py PPriv.py PPub.py Shadowsocks-R.sh Shadowsocks-libev.sh Unlock-Pass-VULTR.sh apacheon.sh blockBT.sh budp.sh dns-netflix.sh   dropbear.sh fai2ban.sh gestor.sh menu message.txt openvpn.sh paysnd.sh ports.sh shadowsocks.sh sockspy.sh speed.sh speedtest.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost usercodes utils.sh v2ray.sh"
+[[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="ADMbot.sh C-SSR.sh Crear-Demo.sh PDirect.py PGet.py POpen.py PPriv.py PPub.py Shadowsocks-R.sh Shadowsocks-libev.sh Unlock-Pass-VULTR.sh apacheon.sh blockBT.sh budp.sh dns-netflix.sh dropbear.sh fai2ban.sh gestor.sh menu message.txt openvpn.sh paysnd.sh ports.sh shadowsocks.sh sockspy.sh speed.sh speedtest.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost usercodes utils.sh v2ray.sh"
 SCPT_DIR="/etc/SCRIPT"
 [[ ! -e ${SCPT_DIR} ]] && mkdir ${SCPT_DIR}
 INSTA_ARQUIVOS="ADMVPS.zip"
@@ -9,7 +9,7 @@ DIR="/etc/http-shell"
 LIST="lista-arq"
 
 CIDdir=/etc/ADM-db && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
-CID="${CIDdir}/Control-ID" && [[ ! -e ${CID} ]] && wget -O ${CID} https://raw.githubusercontent.com/rudi9999/Script/master/Control-ID &> /dev/null
+CID="${CIDdir}/Control-ID" && [[ ! -e ${CID} ]] && echo > ${CID}
 [[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] || apt-get install jq -y &>/dev/null
 [[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/shellscriptx/shellbot/master/ShellBot.sh &> /dev/null
 [[ -e /etc/texto-bot ]] && rm /etc/texto-bot
@@ -114,7 +114,7 @@ bot_retorno+="$LINE\n"
 bot_retorno+="${keyfinal}\n"
 bot_retorno+="$LINE\n"
 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
---text "<b>$(echo -e $bot_retorno)</b>" \
+--text "<i>$(echo -e $bot_retorno)</i>" \
 --parse_mode html
 }
 
@@ -174,8 +174,8 @@ local bot_retorno="$LINE\n"
           bot_retorno+="${lsid}\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
+							--text "</i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
 }
 
 addID_fun () {
@@ -185,15 +185,15 @@ local bot_retorno="$LINE\n"
           bot_retorno+="ID agregado con exito\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
 local bot_retor="$LINE\n"
           bot_retor+="El Administrador te autoriso\n"
 	  bot_retor+="para usar el comando /keygen\n"
 	  bot_retor+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${1} \
-							--text "_$(echo -e $bot_retor)_" \
-							--parse_mode markdown
+							--text "<i>$(echo -e $bot_retor)</i>" \
+							--parse_mode html
 ID-db_fun
   } || {
 local bot_retorno="$LINE\n"
@@ -201,8 +201,8 @@ local bot_retorno="$LINE\n"
           bot_retorno+="Este ID ya existe\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
   }
 }
 
@@ -214,8 +214,8 @@ local bot_retorno="$LINE\n"
           bot_retorno+="ID: ${delid}\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
 ID-db_fun
 }
 
@@ -232,7 +232,7 @@ local bot_retorno="====================\n"
           bot_retorno+="SU ID: ${chatuser}\n"
           bot_retorno+="====================\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "<b>$(echo -e $bot_retorno)</b>" \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
 							--parse_mode html
 }
 
@@ -249,19 +249,14 @@ MIP2=$(wget -qO- ipv4.icanhazip.com)
 }
 
 reboot_fun () {
-  permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
-  [[ $(echo $permited|grep "${chatuser}") = "" ]] && {
   local bot_retorno="$LINE\n"
-          bot_retorno+="Solo el administrador tiene acceso a este comando\n"
+          bot_retorno+="Reiniciando servidor VPS\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
-  } || {
-  ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text Reiniciando...
-  sleep 2
-  reboot
-  }
+							--text "</i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
+sleep 2
+reboot
 }
 
 infosys_fun () {
@@ -281,52 +276,9 @@ local bot_retorno="$LINE\n"
 	  bot_retorno+="HORA: $_hora\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "$(echo -e $bot_retorno)" \
-							--parse_mode markdown
+							--text "</i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
 	return 0
-}
-
-blockfun () {
-local bot_retorno="$LINE\n"
-          bot_retorno+="Usted no tiene permitdo usar este bot\n"
-          bot_retorno+="$LINE\n"
-          bot_retorno+="Comandos Bloqueados\n"
-          bot_retorno+="$LINE\n"
-	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "$(echo -e $bot_retorno)" \
-							--parse_mode markdown
-	return 0
-}
-
-key_fun () {
-  # unset permited
-  # permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-ID")
-  [[ $(cat ${CID}|grep "${chatuser}") = "" ]] && {
-  local bot_retorno="$LINE\n"
-          bot_retorno+="Tu ID de Telegram no esta autorizado\n"
-          bot_retorno+="CONTACTA A @Rufu99\n"
-          bot_retorno+="$LINE\n"
-	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
-  } || {
-  local bot_retorno="====================\n"
-          bot_retorno+="{Admin/06383b7a@58@8dc/8888:%0@+78@+88@+5@}\n"
-          bot_retorno+="====================\n"
-	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
-  }
-}
-
-teste_fun () {
-local bot_retorno="$LINE\n"
-          bot_retorno+="USUARIO: ${chatuser}\n"
-          bot_retorno+="ARGUMENTOS: ${comando[@]}\n"
-          bot_retorno+="$LINE\n"
-	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
 }
 
 invalido () {
@@ -334,7 +286,7 @@ local bot_retorno="$LINE\n"
          bot_retorno+="Comando invalido!\n"
          bot_retorno+="$LINE\n"
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "<b>$(echo -e $bot_retorno)</b>" \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
 							--parse_mode html
 	return 0	
 }
@@ -367,8 +319,8 @@ local bot_retorno="$LINE\n"
 		 bot_retorno+="$LINE\n"
 	 fi
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "_$(echo -e $bot_retorno)_" \
-							--parse_mode markdown
+							--text "</i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
 	return 0	
 }
 
@@ -383,14 +335,12 @@ while true; do
 	    if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 			 case ${comando[0]} in
-				 /[Tt]este)teste_fun &;;
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 				 /[Ii]d|/[Ii]D)myid_fun &;;
 				 *)invalido &;;
 			 esac
 		 else
 			 case ${comando[0]} in
-				 /[Tt]este)teste_fun &;;
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 				 /[Ii]d|/[Ii]D)myid_fun &;;
 				 /[Kk]eygen)gerar_key &;;
@@ -399,7 +349,6 @@ while true; do
 		 fi
 	    else
 		 case ${comando[0]} in
-			 /[Tt]este)teste_fun &;;
 			 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 			 /[Ii]d|/[Ii]D)myid_fun &;;
 			 /[Kk]eygen)gerar_key &;;
