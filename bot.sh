@@ -122,7 +122,7 @@ bot_retorno+="Key Generada Con Exito!\n"
 bot_retorno+="$LINE\n"
 bot_retorno+="${keyfinal}\n"
 bot_retorno+="$LINE\n"
-bot_retorno+="sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/rudi9999/VPS-MX-8.0/master/instalscript.sh &> /dev/null; chmod 777 instalscript.sh && ./instalscript.sh\n"
+# bot_retorno+="sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/rudi9999/VPS-MX-8.0/master/instalscript.sh &> /dev/null; chmod 777 instalscript.sh && ./instalscript.sh\n"
 bot_retorno+="$LINE\n"
 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 --text "<i>$(echo -e $bot_retorno)</i>" \
@@ -319,8 +319,8 @@ local bot_retorno="===========AYUDA===========\n"
 			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/Keygen\n genera una key para\n el instalador del script\n para tener acceso\n deve enviar su ID al admin\n"
 			 bot_retorno+="$LINE\n"
-			 bot_retorno+="/script\n muestra el link de instalacion\n del script para usar sus key\n"
-			 bot_retorno+="$LINE\n"
+			 # bot_retorno+="/script\n muestra el link de instalacion\n del script para usar sus key\n"
+			 #bot_retorno+="$LINE\n"
 			 bot_retorno+="/menu\n muestra el menu\n de comandos disponibles\n"
 			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/ayuda\n muestra este menu de ayuda\n"
@@ -339,8 +339,8 @@ local bot_retorno="===========AYUDA===========\n"
 		 bot_retorno+="$LINE\n"
 		 bot_retorno+="/Keygen\n genera una key para\n el instalador del script\n para tener acceso\n deve enviar su ID al admin\n"
 		 bot_retorno+="$LINE\n"
-		 bot_retorno+="/script\n muestra el link de instalacion\n del script para usar sus key\n"
-		 bot_retorno+="$LINE\n"
+		 # bot_retorno+="/script\n muestra el link de instalacion\n del script para usar sus key\n"
+		 # bot_retorno+="$LINE\n"
 		 bot_retorno+="/reboot\n Reinicia el servidor vps\n"
 		 bot_retorno+="$LINE\n"
 		 bot_retorno+="/menu\n muestra el menu\n de comandos disponibles\n"
@@ -365,7 +365,7 @@ local bot_retorno="=========COMANDOS=========\n"
 		 else
 			 bot_retorno+="/ID (muestra sus ID)\n"
 			 bot_retorno+="/Keygen (genera una key)\n"
-			 bot_retorno+="/script (link install script)\n"
+			 # bot_retorno+="/script (link install script)\n"
 			 bot_retorno+="/menu (muestra este menu)\n"
 			 bot_retorno+="/ayuda (muestra ayuda de los comandos)\n"
 			 bot_retorno+="$LINE\n"
@@ -377,7 +377,7 @@ local bot_retorno="=========COMANDOS=========\n"
 		 bot_retorno+="/del [id](quitar un ID)\n"
 		 bot_retorno+="/list (lista de ID permitidas)\n"
 		 bot_retorno+="/Keygen (genera una key)\n"
-		 bot_retorno+="/script (link install script)\n"
+		 # bot_retorno+="/script (link install script)\n"
 		 bot_retorno+="/reboot (Reinicia el servidor vps)\n"
 		 bot_retorno+="/menu (muestra este menu)\n"
 		 bot_retorno+="/ayuda (muestra ayuda de los comandos)\n"
@@ -411,7 +411,7 @@ while true; do
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_fun &;;
 				 /[Ii]d|/[Ii]D)myid_fun &;;
 				 /[Kk]eygen)gerar_key &;;
-				 /[Ss]cript)link_fun &;;
+				 # /[Ss]cript)link_fun &;;
 				 *)invalido &;;
 			 esac
 		 fi
@@ -426,7 +426,7 @@ while true; do
 			 /[Aa]dd)addID_fun "${comando[1]}" &;;
 			 /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 			 /[Rr]eboot)reboot_fun &;;
-			 /[Ss]cript)link_fun &;;
+			 # /[Ss]cript)link_fun &;;
 			 *)download_file &;;
 			 /*)invalido &;;
 		 esac
