@@ -174,7 +174,7 @@ local bot_retorno="$LINE\n"
           bot_retorno+="${lsid}\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "</i>$(echo -e $bot_retorno)</i>" \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
 							--parse_mode html
 }
 
@@ -253,7 +253,7 @@ reboot_fun () {
           bot_retorno+="Reiniciando servidor VPS\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "</i>$(echo -e $bot_retorno)</i>" \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
 							--parse_mode html
 sleep 2
 reboot
@@ -276,7 +276,7 @@ local bot_retorno="$LINE\n"
 	  bot_retorno+="HORA: $_hora\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "</i>$(echo -e $bot_retorno)</i>" \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
 							--parse_mode html
 	return 0
 }
