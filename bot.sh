@@ -296,13 +296,18 @@ local bot_retorno="===========AYUDA===========\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 			 bot_retorno+="/ID\n muestra sus ID de telegram\n para tener acceso al /keygen\n deve enviar su ID al admin\n"
+			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/menu\n muestra el menu\n de comandos disponibles\n"
+			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/ayuda\n muestra este menu de ayuda\n"
 			 bot_retorno+="$LINE\n"
 		 else
 			 bot_retorno+="/ID\n muestra sus ID de telegram\n para tener acceso al /keygen\n deve enviar su ID al admin\n"
+			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/Keygen\n genera una key para\n el instalador del script\n para tener acceso\n deve enviar su ID al admin\n"
+			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/menu\n muestra el menu\n de comandos disponibles\n"
+			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/ayuda\n muestra este menu de ayuda\n"
 			 bot_retorno+="$LINE\n"
 		 fi
@@ -333,7 +338,7 @@ local bot_retorno="===========AYUDA===========\n"
 }
 
 menu_fun () {
-local bot_retorno="==========COMANDOS==========\n"
+local bot_retorno="=========COMANDOS=========\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 			 bot_retorno+="/ID (muestra sus ID)\n"
