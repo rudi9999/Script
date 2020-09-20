@@ -340,7 +340,6 @@ local bot_retorno="$LINE\n"
 }
 
 ajuda_fun () {
-permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
 local bot_retorno="$LINE\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
@@ -352,21 +351,19 @@ local bot_retorno="$LINE\n"
 			 bot_retorno+="COMANDOS\n"
 			 bot_retorno+="/ayuda (muestra este menu)\n"
 			 bot_retorno+="/ID (muestra sus ID)\n"
-			 bot_retorno+="/Keygen (requiere permisos)\n"
+			 bot_retorno+="/Keygen (genera una key)\n"
 			 bot_retorno+="$LINE\n"
 		 fi
 	 else
 		 bot_retorno+="COMANDOS\n"
-		 bot_retorno+="/ayuda (muestra este menu)\n"
-		 bot_retorno+="/ID (muestra sus ID)\n"
-		 bot_retorno+="/Keygen (requiere permisos)\n"
-		 bot_retorno+="$LINE\n"
-		 bot_retorno+="Comandos solo admin\n"
 		 bot_retorno+="/infosys (informacion del sistema)\n"
-		 bot_retorno+="/addid (añadir nuevas ID)\n"
+		 bot_retorno+="/ID (muestra sus ID)\n"
+		 bot_retorno+="/add (añadir nuevas ID)\n"
 		 bot_retorno+="/del (quitar un ID)\n"
 		 bot_retorno+="/list (lista de ID permitidas)\n"
-		 bot_retorno+="/reboot (solo administrador)\n"
+		 bot_retorno+="/Keygen (genera una key)\n"
+		 bot_retorno+="/reboot (Reinicia el servidor vps)\n"
+		 bot_retorno+="/ayuda (muestra este menu)\n"
 		 bot_retorno+="$LINE\n"
 	 fi
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
@@ -389,6 +386,7 @@ while true; do
 				 /[Tt]este)teste_fun &;;
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 				 /[Ii]d|/[Ii]D)myid_fun &;;
+				 *)invalido &;;
 			 esac
 		 else
 			 case ${comando[0]} in
@@ -396,6 +394,7 @@ while true; do
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 				 /[Ii]d|/[Ii]D)myid_fun &;;
 				 /[Kk]eygen)gerar_key &;;
+				 *)invalido &;;
 			 esac
 		 fi
 	    else
@@ -405,8 +404,8 @@ while true; do
 			 /[Ii]d|/[Ii]D)myid_fun &;;
 			 /[Kk]eygen)gerar_key &;;
 			 /[Ii]nfosys)infosys_fun &;;
-			 /[Ll]istid|/[Ll]ist)listID_fun &;;
-			 /[Aa]ddid|/[Aa]dd)addID_fun "${comando[1]}" &;;
+			 /[Ll]ist)listID_fun &;;
+			 /[Aa]dd)addID_fun "${comando[1]}" &;;
 			 /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 			 /[Rr]eboot)reboot_fun &;;
 			 *)download_file &;;
