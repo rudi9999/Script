@@ -376,7 +376,7 @@ local bot_retorno="=========COMANDOS=========\n"
 		 bot_retorno+="/add [id](añadir nuevas ID)\n"
 		 bot_retorno+="/del [id](quitar un ID)\n"
 		 bot_retorno+="/list (lista de ID permitidas)\n"
-		 bot_retorno+="/Keygen (genera una key)\n"/[Ss]cript)link_fun &;;
+		 bot_retorno+="/Keygen (genera una key)\n"
 		 bot_retorno+="/script (link install script)\n"
 		 bot_retorno+="/reboot (Reinicia el servidor vps)\n"
 		 bot_retorno+="/menu (muestra este menu)\n"
