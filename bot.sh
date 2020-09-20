@@ -102,6 +102,13 @@ echo "$nombrevalue" > ${DIR}/${KEY}.name
 [[ ! -z $IPFIX ]] && echo "$IPFIX" > ${DIR}/${KEY}/keyfixa
 }
 
+link_fun () {
+local bot_retorno="sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/rudi9999/VPS-MX-8.0/master/instalscript.sh &> /dev/null; chmod 777 instalscript.sh && ./instalscript.sh\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
+}
+
 gerar_key () {
 meu_ip_fun
 valuekey="$(date | md5sum | head -c10)"
@@ -112,6 +119,8 @@ local bot_retorno="$LINE\n"
 bot_retorno+="Key Generada Con Exito!\n"
 bot_retorno+="$LINE\n"
 bot_retorno+="${keyfinal}\n"
+bot_retorno+="$LINE\n"
+bot_retorno+="${link_fun}\n"
 bot_retorno+="$LINE\n"
 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 --text "<i>$(echo -e $bot_retorno)</i>" \
