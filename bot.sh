@@ -296,25 +296,28 @@ local bot_retorno="$LINE\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 			 bot_retorno+="COMANDOS\n"
-			 bot_retorno+="/ayuda (muestra este menu)\n"
 			 bot_retorno+="/ID (muestra sus ID)\n"
+			 bot_retorno+="/menu\n"
+			 bot_retorno+="/ayuda (muestra este menu)\n"
 			 bot_retorno+="$LINE\n"
 		 else
 			 bot_retorno+="COMANDOS\n"
-			 bot_retorno+="/ayuda (muestra este menu)\n"
 			 bot_retorno+="/ID (muestra sus ID)\n"
 			 bot_retorno+="/Keygen (genera una key)\n"
+			 bot_retorno+="/menu\n"
+			 bot_retorno+="/ayuda (muestra este menu)\n"
 			 bot_retorno+="$LINE\n"
 		 fi
 	 else
 		 bot_retorno+="COMANDOS\n"
 		 bot_retorno+="/infosys (informacion del sistema)\n"
 		 bot_retorno+="/ID (muestra sus ID)\n"
-		 bot_retorno+="/add (añadir nuevas ID)\n"
-		 bot_retorno+="/del (quitar un ID)\n"
+		 bot_retorno+="/add [id](añadir nuevas ID)\n"
+		 bot_retorno+="/del [id](quitar un ID)\n"
 		 bot_retorno+="/list (lista de ID permitidas)\n"
 		 bot_retorno+="/Keygen (genera una key)\n"
 		 bot_retorno+="/reboot (Reinicia el servidor vps)\n"
+		 bot_retorno+="/menu\n"
 		 bot_retorno+="/ayuda (muestra este menu)\n"
 		 bot_retorno+="$LINE\n"
 	 fi
@@ -335,8 +338,9 @@ while true; do
 	    if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 			 case ${comando[0]} in
-				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ajuda_fun &;;
 				 /[Ii]d|/[Ii]D)myid_fun &;;
+				 /[Mm]enu|[Mm]enu|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)menu_fun &;;
+				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)ayuda_fun &;;
 				 *)invalido &;;
 			 esac
 		 else
