@@ -106,7 +106,7 @@ echo "$nombrevalue" > ${DIR}/${KEY}.name
 link_fun () {
 link="sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/rudi9999/VPS-MX-8.0/master/instalscript.sh &> /dev/null; chmod 777 instalscript.sh && ./instalscript.sh"
 local bot_retorno="$LINE\n"
-	bot_retorno+="${escapeHtml(link)}\n"
+	bot_retorno+="${escapeHtml($link)}\n"
 	bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "<i>$(echo -e $bot_retorno)</i>" \
