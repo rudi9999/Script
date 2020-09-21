@@ -16,23 +16,24 @@ CID="${CIDdir}/Control-ID" && [[ ! -e ${CID} ]] && echo > ${CID}
 LINE="==========================="
 
 #HORA Y FECHA
-_hora=$(printf '%(%H:%M:%S)T') 
-_fecha=$(printf '%(%D)T') 
+#_hora=$(printf '%(%H:%M:%S)T') 
+#_fecha=$(printf '%(%D)T') 
 
 #PROCESSADOR
-_core=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
-_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
+#_core=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
+#_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
 
 #SISTEMA-USO DA CPU-MEMORIA RAM
-ram1=$(free -h | grep -i mem | awk {'print $2'})
-ram2=$(free -h | grep -i mem | awk {'print $4'})
-ram3=$(free -h | grep -i mem | awk {'print $3'})
+#ram1=$(free -h | grep -i mem | awk {'print $2'})
+#ram2=$(free -h | grep -i mem | awk {'print $4'})
+#ram3=$(free -h | grep -i mem | awk {'print $3'})
 
-_ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
-_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
+#_ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
+#_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
 
 #info del sistema
 os_system () {
+unset system
 system=$(echo $(cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/      //')) && echo $system|awk '{print $1, $2}'
 }
 
@@ -271,6 +272,32 @@ reboot
 }
 
 infosys_fun () {
+
+#HORA Y FECHA
+unset _hora
+unset _fecha
+_hora=$(printf '%(%H:%M:%S)T') 
+_fecha=$(printf '%(%D)T') 
+
+#PROCESSADOR
+unset _core
+unset _usop
+_core=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
+_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
+
+#SISTEMA-USO DA CPU-MEMORIA RAM
+unset ram1
+unset ram2
+unset ram3
+ram1=$(free -h | grep -i mem | awk {'print $2'})
+ram2=$(free -h | grep -i mem | awk {'print $4'})
+ram3=$(free -h | grep -i mem | awk {'print $3'})
+
+unset _ram
+unset _usor
+_ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
+_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
+
 local bot_retorno="$LINE\n"
           bot_retorno+="S.O: $(os_system)\n"
 	  bot_retorno+="Su IP es: $(meu_ip)\n"
