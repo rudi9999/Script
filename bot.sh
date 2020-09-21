@@ -15,12 +15,6 @@ CID="${CIDdir}/Control-ID" && [[ ! -e ${CID} ]] && echo > ${CID}
 [[ -e /etc/texto-bot ]] && rm /etc/texto-bot
 LINE="==========================="
 
-#info del sistema
-os_system () {
-unset system
-system=$(echo $(cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/      //')) && echo $system|awk '{print $1, $2}'
-}
-
 # Importando API
 source ShellBot.sh
 
@@ -30,6 +24,28 @@ bot_token='1249652996:AAE7VsdIppmjKq4O-eX3tk70WdHvPVzz7wA'
 # Inicializando el bot
 ShellBot.init --token "$bot_token" --monitor --return map
 ShellBot.username
+
+start_gen () {
+unset PIDGEN
+PIDGEN=$(ps aux|grep -v grep|grep "http-server.sh")
+if [[ ! $PIDGEN ]]; then
+screen -dmS generador /bin/http-server.sh -start
+local bot_retorno="$LINE\n"
+          bot_retorno+="Generador\n <u>Online</u>\n"
+	  bot_retorno+="$LINE\n"
+	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
+else
+killall http-server.sh
+local bot_retorno="$LINE\n"
+          bot_retorno+="Generador\n <u>Offline</u>\n"
+	  bot_retorno+="$LINE\n"
+	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
+fi
+}
 
 ofus () {
 unset server
@@ -385,6 +401,10 @@ local bot_retorno="=========COMANDOS=========\n"
 			 bot_retorno+="$LINE\n"
 		 fi
 	 else
+		 unset PID_GEN
+		 PID_GEN=$(ps x|grep -v grep|grep "http-server.sh")
+		 [[ ! $PID_GEN ]] && PID_GEN=Off || PID_GEN=On
+		 
 		 bot_retorno+="/infosys (informacion del sistema)\n"
 		 bot_retorno+="/ID (muestra sus ID)\n"
 		 bot_retorno+="/add [id](añadir nuevas ID)\n"
@@ -392,9 +412,10 @@ local bot_retorno="=========COMANDOS=========\n"
 		 bot_retorno+="/list (lista de ID permitidas)\n"
 		 bot_retorno+="/Keygen (genera una key)\n"
 		 # bot_retorno+="/script (link install script)\n"
-		 bot_retorno+="/reboot (Reinicia el servidor vps)\n"
+		 bot_retorno+="/power (online/offline) ($PID_GEN)\n"
 		 bot_retorno+="/menu (muestra este menu)\n"
 		 bot_retorno+="/ayuda (muestra ayuda de los comandos)\n"
+		 bot_retorno+="/reboot (Reinicia el servidor vps)\n"
 		 bot_retorno+="$LINE\n"
 	 fi
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
@@ -435,6 +456,7 @@ while true; do
 			 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_fun &;;
 			 /[Ii]d|/[Ii]D)myid_fun &;;
 			 /[Kk]eygen)gerar_key &;;
+			 /[Pp]ower)start_gen &;;
 			 /[Ii]nfosys)infosys_fun &;;
 			 /[Ll]ist)listID_fun &;;
 			 /[Aa]dd)addID_fun "${comando[1]}" &;;
