@@ -31,7 +31,7 @@ PIDGEN=$(ps aux|grep -v grep|grep "http-server.sh")
 if [[ ! $PIDGEN ]]; then
 screen -dmS generador /bin/http-server.sh -start
 local bot_retorno="$LINE\n"
-          bot_retorno+="Generador\n <u>Online</u>\n"
+          bot_retorno+="Generador: <u>Online</u>\n"
 	  bot_retorno+="$LINE\n"
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "<i>$(echo -e $bot_retorno)</i>" \
@@ -39,7 +39,7 @@ local bot_retorno="$LINE\n"
 else
 killall http-server.sh
 local bot_retorno="$LINE\n"
-          bot_retorno+="Generador\n <u>Offline</u>\n"
+          bot_retorno+="Generador: <u>Offline</u>\n"
 	  bot_retorno+="$LINE\n"
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "<i>$(echo -e $bot_retorno)</i>" \
@@ -371,11 +371,13 @@ local bot_retorno="===========AYUDA===========\n"
 		 bot_retorno+="$LINE\n"
 		 # bot_retorno+="/script\n muestra el link de instalacion\n del script para usar sus key\n"
 		 # bot_retorno+="$LINE\n"
-		 bot_retorno+="/reboot\n Reinicia el servidor vps\n"
+		 bot_retorno+="/power\n poner o sacar de linea el generador\n"
 		 bot_retorno+="$LINE\n"
 		 bot_retorno+="/menu\n muestra el menu\n de comandos disponibles\n"
 		 bot_retorno+="$LINE\n"
 		 bot_retorno+="/ayuda\n muestra este menu de ayuda\n"
+		 bot_retorno+="$LINE\n"
+		 bot_retorno+="/reboot\n Reinicia el servidor vps\n"
 		 bot_retorno+="$LINE\n"
 	 fi
 	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
