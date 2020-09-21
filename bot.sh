@@ -105,7 +105,7 @@ echo "$nombrevalue" > ${DIR}/${KEY}.name
 
 link_fun () {
 local bot_retorno="$LINE\n"
-	bot_retorno+="sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/rudi9999/VPS-MX-8.0/master/instalscript.sh &> /dev/null; chmod 777 instalscript.sh && ./instalscript.sh\n"
+	bot_retorno+="sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/rudi9999/VPS-MX-8.0/master/instalscript.sh \&> /dev/null; chmod 777 instalscript.sh \&\& ./instalscript.sh\n"
 	bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "<i>$(echo -e $bot_retorno)</i>" \
@@ -464,7 +464,7 @@ while true; do
 			 /[Aa]dd)addID_fun "${comando[1]}" &;;
 			 /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 			 /[Rr]eboot)reboot_fun &;;
-			 # /[Ss]cript)link_fun &;;
+			 /[Ss]cript)link_fun &;;
 			 *)download_file &;;
 			 /*)invalido &;;
 		 esac
