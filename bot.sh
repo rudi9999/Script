@@ -349,7 +349,7 @@ local bot_retorno="===========AYUDA===========\n"
 			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/Keygen\n genera una key para\n el instalador del script\n para tener acceso\n deve enviar su ID al admin\n"
 			 bot_retorno+="$LINE\n"
-			 bot_retorno+="/script\n muestra el link de instalacion\n del script para usar sus key\n"
+			 bot_retorno+="/instal\n muestra el link de instalacion\n del script para usar sus key\n"
 			 bot_retorno+="$LINE\n"
 			 bot_retorno+="/menu\n muestra el menu\n de comandos disponibles\n"
 			 bot_retorno+="$LINE\n"
@@ -369,7 +369,7 @@ local bot_retorno="===========AYUDA===========\n"
 		 bot_retorno+="$LINE\n"
 		 bot_retorno+="/Keygen\n genera una key para\n el instalador del script\n para tener acceso\n deve enviar su ID al admin\n"
 		 bot_retorno+="$LINE\n"
-		 bot_retorno+="/script\n muestra el link de instalacion\n del script para usar sus key\n"
+		 bot_retorno+="/instal\n muestra el link de instalacion\n del script para usar sus key\n"
 		 bot_retorno+="$LINE\n"
 		 bot_retorno+="/power\n poner o sacar de linea el generador\n"
 		 bot_retorno+="$LINE\n"
@@ -397,7 +397,7 @@ local bot_retorno="=========COMANDOS=========\n"
 		 else
 			 bot_retorno+="/ID (muestra sus ID)\n"
 			 bot_retorno+="/Keygen (genera una key)\n"
-			 bot_retorno+="/script (link install script)\n"
+			 bot_retorno+="/instal (link de instalacion)\n"
 			 bot_retorno+="/menu (muestra este menu)\n"
 			 bot_retorno+="/ayuda (muestra ayuda de los comandos)\n"
 			 bot_retorno+="$LINE\n"
@@ -413,7 +413,7 @@ local bot_retorno="=========COMANDOS=========\n"
 		 bot_retorno+="/del [id](quitar un ID)\n"
 		 bot_retorno+="/list (lista de ID permitidas)\n"
 		 bot_retorno+="/Keygen (genera una key)\n"
-		 bot_retorno+="/script (link install script)\n"
+		 bot_retorno+="/instal (link de instalacion)\n"
 		 bot_retorno+="/power (online/offline) ($PID_GEN)\n"
 		 bot_retorno+="/menu (muestra este menu)\n"
 		 bot_retorno+="/ayuda (muestra ayuda de los comandos)\n"
@@ -448,7 +448,7 @@ while true; do
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_fun &;;
 				 /[Ii]d|/[Ii]D)myid_fun &;;
 				 /[Kk]eygen)gerar_key &;;
-				 /[Ss]cript)link_fun &;;
+				 /[Ii]nstal)link_fun &;;
 				 *)invalido &;;
 			 esac
 		 fi
@@ -464,7 +464,7 @@ while true; do
 			 /[Aa]dd)addID_fun "${comando[1]}" &;;
 			 /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 			 /[Rr]eboot)reboot_fun &;;
-			 /[Ss]cript)link_fun &;;
+			 /[Ii]nstal)link_fun &;;
 			 *)download_file &;;
 			 /*)invalido &;;
 		 esac
