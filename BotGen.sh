@@ -448,7 +448,7 @@ while true; do
 	    chatuser="$(echo ${message_chat_id[$id]}|cut -d'-' -f2)"
 	    echo $chatuser >&2
 	    comando=(${message_text[$id]})
-	    permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Script/master/Control-Admin")
+	    permited=$(cat ${CIDdir}/Admin-ID)
 	    if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 			 case ${comando[0]} in
