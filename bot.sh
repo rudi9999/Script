@@ -332,6 +332,19 @@ local bot_retorno="$LINE\n"
 	return 0	
 }
 
+
+cache_fun () {
+infosys_fun
+echo 3 > /proc/sys/vm/drop_caches
+local bot_retorno="$LINE\n"
+         bot_retorno+="limpiado del cache con exito!\n"
+         bot_retorno+="$LINE\n"
+	     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
+infosys_fun
+}
+
 ayuda_fun () {
 local bot_retorno="===========AYUDA===========\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
@@ -417,6 +430,7 @@ local bot_retorno="=========COMANDOS=========\n"
 		 bot_retorno+="/power (online/offline) ($PID_GEN)\n"
 		 bot_retorno+="/menu (muestra este menu)\n"
 		 bot_retorno+="/ayuda (muestra ayuda de los comandos)\n"
+		 bot_retorno+="/cache (Reinicia el servidor vps)\n"
 		 bot_retorno+="/reboot (Reinicia el servidor vps)\n"
 		 bot_retorno+="$LINE\n"
 	 fi
@@ -465,6 +479,7 @@ while true; do
 			 /[Dd]el|/[Dd]elid)deleteID_fun "${comando[1]}" &;;
 			 /[Rr]eboot)reboot_fun &;;
 			 /[Ii]nstal)link_fun &;;
+			 /[Cc]ache)cache_fun &;;
 			 *)download_file &;;
 			 /*)invalido &;;
 		 esac
