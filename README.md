@@ -8,5 +8,5 @@ https://raw.githubusercontent.com/rudi9999/Script/master/Proxy-Privado.sh
 
 # bot
 
-rm bot.sh; wget https://raw.githubusercontent.com/rudi9999/Script/master/bot.sh; chmod +x bot.sh; ./bot.sh
+rm BotGen.sh.sh; wget https://raw.githubusercontent.com/rudi9999/Script/master/BotGen.sh; chmod +x BotGen.sh; ./BotGen.sh
 
