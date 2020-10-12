@@ -33,7 +33,7 @@ echo -e "\033[1;31mATENCION:\n\033[1;34mAñadir Contraseña Al Payload o Enter P
 Añadir Contraseña Al Payload
 
 echo -e "$BARRA"
-echo -ne "Contrasena: "
+echo -ne "Contraseña: "
 read ipdns
 if [[ ! -z $ipdns ]]; then
 echo -e "$BARRA"
@@ -44,7 +44,7 @@ echo -e "\033[1;31mEJEMPLO 2:\n\033[1;33m\033[1;36mGET http://tuhost.com/ HTTP/1
 fi
 while [[ -z $FMSG || $FMSG = @(s|S|y|Y) ]]; do
 echo -e "$BARRA"
-echo -ne "Introduzca Un Mensaje De Conexion: "
+echo -ne "Introduzca Un Mensaje De Status: "
 read mensage
 echo -e "$BARRA"
 echo -e "Seleccione El Color De Mensaje: "
