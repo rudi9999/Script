@@ -13,16 +13,17 @@ fi
 clear
 cowsay -f tux "Esta herramienta le cambia y da color al status de conexion y agrega una contrasena a tu payload para mayor seguridad...." | lolcat 
 figlet __TELLO__ | lolcat
+
 echo -e "$BARRA"
-echo -e "\033[1;31mPROXY PYTHON COLOR\033[0m"
+echo -e "\033[1;31mPUERTO PROXY PYTHON\033[0m"
 echo -e "$BARRA"
-echo -ne "Introduzca puerto: "
+echo -ne "Introduzca puerto proxy: "
 read port
 
 echo -e "$BARRA"
-echo -e "\033[1;31mPROXY PYTHON COLOR\033[0m"
+echo -e "\033[1;31mPUERTO LOCAL\033[0m"
 echo -e "$BARRA"
-echo -ne "Introduzca puerto local: "
+echo -ne "Introduzca puerto local OpenSSH o Dropbear: "
 read portlocal
 
 echo -e "$BARRA"
