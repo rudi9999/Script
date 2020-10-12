@@ -35,29 +35,29 @@ read mensage
 echo -e "$BARRA"
 echo -e "Seleccione El Color De Mensaje: "
 cat << Eof
-[ 1 ] -- #ff183f -- rojo
-[ 2 ] -- #3fff18 -- verde
-[ 3 ] -- #6518ff -- morado
-[ 4 ] -- #ff6518 -- naranja
-[ 5 ] -- #18ffd9 -- cyan
-[ 6 ] -- #ffd700 -- amarillo
-[ 7 ] -- #1e90ff -- azul
-[ 8 ] -- #000000 -- negro
-[ 9 ] -- #00ff7f -- agua marina
-[ 10 ] -- #8b4513 -- cafe
+[ 1 ] -- #ff183f -- red
+[ 2 ] -- #3fff18 -- green
+[ 3 ] -- #6518ff -- purple
+[ 4 ] -- #ff6518 -- Teal
+[ 5 ] -- #18ffd9 -- aqua
+[ 6 ] -- #ffd700 -- yellow
+[ 7 ] -- #1e90ff -- blue
+[ 8 ] -- #000000 -- black
+[ 9 ] -- #00ff7f -- Fuchsia
+[ 10 ] -- #8b4513 -- marron
 Eof
 read -p "Opcion: " cor
 case $cor in
 "1")corx="<font color="red">${mensage}</font>";;
 "2")corx="<font color="green">${mensage}</font>";;
 "3")corx="<font color="purple">${mensage}</font";;
-"4")corx="<font color="red">${mensage}</font>";;
-"5")corx="<font color="red">${mensage}</font>";;
-"6")corx="<font color="red">${mensage}</font>";;
+"4")corx="<font color="Teal">${mensage}</font>";;
+"5")corx="<font color="aqua">${mensage}</font>";;
+"6")corx="<font color="yellow">${mensage}</font>";;
 "7")corx="<font color="blue">${mensage}</font>";;
-"8")corx="<font color="red">${mensage}</font>";;
-"9")corx="<font color="red">${mensage}</font>";;
-"10")corx="<font color="red">${mensage}</font>";;
+"8")corx="<font color="black">${mensage}</font>";;
+"9")corx="<font color="Fuchsia">${mensage}</font>";;
+"10")corx="<font color="maroon">${mensage}</font>";;
 *)corx="<font color="red">${mensage}</font>";;
 esac
 if [[ ! -z ${RETORNO} ]]; then
