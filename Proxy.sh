@@ -18,6 +18,13 @@ echo -e "\033[1;31mPROXY PYTHON COLOR\033[0m"
 echo -e "$BARRA"
 echo -ne "Introduzca puerto: "
 read port
+
+echo -e "$BARRA"
+echo -e "\033[1;31mPROXY PYTHON COLOR\033[0m"
+echo -e "$BARRA"
+echo -ne "Introduzca puerto local: "
+read portlocal
+
 echo -e "$BARRA"
 echo -e "\033[1;31mATENCION:\n\033[1;34mPara Utilizar Este Proxy Es Necesario Agregar Una Linea A Su Payload\033[0m"
 echo -e "$BARRA"
@@ -82,7 +89,7 @@ LISTENING_PORT = int("$port")
 PASS = str("$ipdns")
 BUFLEN = 4096 * 4
 TIMEOUT = 60
-DEFAULT_HOST = '127.0.0.1:22'
+DEFAULT_HOST = '127.0.0.1:$portlocal'
 msg = "HTTP/1.1 200 <strong>$RETORNO</strong>\r\nContent-length: 0\r\n\r\nHTTP/1.1 200 !!!conexion exitosa!!!\r\n\r\n"
 RESPONSE = str(msg)
 
