@@ -49,12 +49,12 @@ Eof
 read -p "Opcion: " cor
 case $cor in
 "1")corx="<font color="red">${mensage}</font>";;
-"2")corx="<font color="red">${mensage}</font>";;
-"3")corx="<font color="red">${mensage}</font";;
+"2")corx="<font color="green">${mensage}</font>";;
+"3")corx="<font color="purple">${mensage}</font";;
 "4")corx="<font color="red">${mensage}</font>";;
 "5")corx="<font color="red">${mensage}</font>";;
 "6")corx="<font color="red">${mensage}</font>";;
-"7")corx="<font color="red">${mensage}</font>";;
+"7")corx="<font color="blue">${mensage}</font>";;
 "8")corx="<font color="red">${mensage}</font>";;
 "9")corx="<font color="red">${mensage}</font>";;
 "10")corx="<font color="red">${mensage}</font>";;
