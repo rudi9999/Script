@@ -1,4 +1,5 @@
 #!/bin/bash
+# -*- ENCODING: UTF-8 -*-
 BARRA="\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
 echo -e "\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
 echo ""
@@ -27,14 +28,19 @@ echo -ne "Introduzca puerto local OpenSSH o Dropbear: "
 read portlocal
 
 echo -e "$BARRA"
-echo -e "\033[1;31mATENCION:\n\033[1;34mPara Utilizar Este Proxy Es Necesario Agregar Una Linea A Su Payload\033[0m"
+echo -e "\033[1;31mATENCION:\n\033[1;34mAñadir Contraseña Al Payload o Enter Para Omitir\033[0m"
+
+Añadir Contraseña Al Payload
+
 echo -e "$BARRA"
-echo -ne "Escriba Una Contrasena Para El Proxy: "
+echo -ne "Contrasena: "
 read ipdns
 if [[ ! -z $ipdns ]]; then
 echo -e "$BARRA"
-echo -e "\033[1;34mAGREGUE ESTA LINEA AL INICIO DE SU PAYLOAD:\n\033[1;36m[crlf]X-Pass: $ipdns[crlf]\n\033[0m"
-echo -e "\033[1;31mEJEMPLO:\n\033[1;33m\033[1;36m[crlf]X-Pass: $ipdns[crlf]GET http://tuhost.com/ HTTP/1.0 [cr|f]\033[0m"
+echo -e "\033[1;31mATENCION:\n\033[1;34mPara Utilizar Este Proxy Es Necesario Agregar Una Linea A Su Payload\033[0m"
+echo -e "\033[1;34mAGREGUE ESTA LINEA A SU PAYLOAD:\n\033[1;36m[crlf]X-Pass: $ipdns[crlf]\n\033[0m"
+echo -e "\033[1;31mEJEMPLO 1:\n\033[1;33m\033[1;36m[crlf]X-Pass: $ipdns[crlf]GET http://tuhost.com/ HTTP/1.0 [cr|f]\033[0m"
+echo -e "\033[1;31mEJEMPLO 2:\n\033[1;33m\033[1;36mGET http://tuhost.com/ HTTP/1.0 [crlf][crlf]X-Pass: $ipdns[crlf]\033[0m"
 fi
 while [[ -z $FMSG || $FMSG = @(s|S|y|Y) ]]; do
 echo -e "$BARRA"
