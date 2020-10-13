@@ -28,12 +28,9 @@ echo -ne "Introduzca puerto local OpenSSH o Dropbear: "
 read portlocal
 
 echo -e "$BARRA"
-echo -e "\033[1;31mATENCION:\n\033[1;34mAñadir Contraseña Al Payload o Enter Para Omitir\033[0m"
-
-Añadir Contraseña Al Payload
-
+echo -e "\033[1;31mAÑADIR CONTRASEÑA AL PAYLOAD\033[0m"
 echo -e "$BARRA"
-echo -ne "Contraseña: "
+echo -ne "Contraseña o Enter para omitor: "
 read ipdns
 if [[ ! -z $ipdns ]]; then
 echo -e "$BARRA"
