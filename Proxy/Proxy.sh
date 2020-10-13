@@ -2,6 +2,9 @@
 # -*- ENCODING: UTF-8 -*-
 # @reboot /root/Proxy.sh
 sleep 30
+
+port=$1
+
 BARRA="\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
 echo -e "\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
 echo ""
@@ -17,23 +20,33 @@ clear
 cowsay -f tux "Esta herramienta le cambia y da color al status de conexion y agrega una contrasena a tu payload para mayor seguridad...." | lolcat 
 figlet __TELLO__ | lolcat
 
+port=$1
+if [[ -z $port ]]; then
 echo -e "$BARRA"
 echo -e "\033[1;31mPUERTO PROXY PYTHON\033[0m"
 echo -e "$BARRA"
 echo -ne "Introduzca puerto proxy: "
-port=8080
+read port
+fi
 
+portlocal=$2
+if [[ -z $portlocal ]]; then
 echo -e "$BARRA"
 echo -e "\033[1;31mPUERTO LOCAL\033[0m"
 echo -e "$BARRA"
 echo -ne "Introduzca puerto local OpenSSH o Dropbear: "
-portlocal=443
+read portlocal
+fi
 
+ipdns=$3
+if [[ -z $ipdns ]]; then
 echo -e "$BARRA"
 echo -e "\033[1;31mAÑADIR CONTRASEÑA AL PAYLOAD\033[0m"
 echo -e "$BARRA"
 echo -ne "Contraseña o Enter para omitor: "
-# read ipdns
+read ipdns
+fi
+
 if [[ ! -z $ipdns ]]; then
 echo -e "$BARRA"
 echo -e "\033[1;31mATENCION:\n\033[1;34mPara Utilizar Este Proxy Es Necesario Agregar Una Linea A Su Payload\033[0m"
@@ -41,10 +54,18 @@ echo -e "\033[1;34mAGREGUE ESTA LINEA A SU PAYLOAD:\n\033[1;36m[crlf]X-Pass: $ip
 echo -e "\033[1;31mEJEMPLO 1:\n\033[1;33m\033[1;36m[crlf]X-Pass: $ipdns[crlf]GET http://tuhost.com/ HTTP/1.0 [cr|f]\033[0m"
 echo -e "\033[1;31mEJEMPLO 2:\n\033[1;33m\033[1;36mGET http://tuhost.com/ HTTP/1.0 [crlf][crlf]X-Pass: $ipdns[crlf]\033[0m"
 fi
+
 while [[ -z $FMSG || $FMSG = @(s|S|y|Y) ]]; do
+
+mensage=$4
+if [[ -z $mensage ]]; then
 echo -e "$BARRA"
 echo -ne "Introduzca Un Mensaje De Status: "
-mensage="VPS"
+read mensage
+fi
+
+cor=$5
+if [[ -z $cor ]]; then
 echo -e "$BARRA"
 echo -e "Seleccione El Color De Mensaje: "
 echo -e "$BARRA"
@@ -59,8 +80,10 @@ echo -e "\033[1;49;92m[8] > \033[0;107;30mblack\e[0m"
 echo -e "\033[1;49;92m[9] > \033[0;49;95mFuchsia"
 echo -e "\033[1;49;92m[10] > \033[0;49;33mBrown"
 echo -e "$BARRA"
-# read -p "Opcion: " cor
-case 1 in
+read -p "Opcion: " cor
+fi
+
+case $cor in
 "1")corx="<font color="red">${mensage}</font>";;
 "2")corx="<font color="green">${mensage}</font>";;
 "3")corx="<font color="purple">${mensage}</font";;
@@ -78,9 +101,13 @@ RETORNO="${RETORNO} ${corx}"
 else
 RETORNO="${corx}"
 fi
+
+FMSG=$6
+if [[ -z $FMSG ]]; then
 echo -e "$BARRA"
 echo -ne "Agregar Mas Mensajes? [S/N]: "
-FMSG="N"
+read FMSG
+fi
 done
 echo -e "$BARRA"
 # read -p "Enter..."
