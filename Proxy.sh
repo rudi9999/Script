@@ -2,15 +2,15 @@
 # -*- ENCODING: UTF-8 -*-
 BARRA="\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
 echo -e "\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
-echo ""
-if [[ ! -e /usr/bin/python ]]; then
-apt-get install python python-pip cowsay figlet lolcat -y
-clear
-echo -e "$BARRA"
-echo -e "Ejecute de nuevo el script"
-echo -e "$BARRA"
-exit
-fi
+#echo ""
+#if [[ ! -e /usr/bin/python ]]; then
+#apt-get install python python-pip cowsay figlet lolcat -y
+#clear
+#echo -e "$BARRA"
+#echo -e "Ejecute de nuevo el script"
+#echo -e "$BARRA"
+#exit
+#fi
 clear
 cowsay -f tux "Esta herramienta le cambia y da color al status de conexion y agrega una contrasena a tu payload para mayor seguridad...." | lolcat 
 figlet __TELLO__ | lolcat
