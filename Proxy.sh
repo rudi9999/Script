@@ -45,18 +45,18 @@ echo -ne "Introduzca Un Mensaje De Status: "
 read mensage
 echo -e "$BARRA"
 echo -e "Seleccione El Color De Mensaje: "
-cat << Eof
-[ 1 ] -- #ff183f -- red
-[ 2 ] -- #3fff18 -- green
-[ 3 ] -- #6518ff -- purple
-[ 4 ] -- #ff6518 -- Teal
-[ 5 ] -- #18ffd9 -- aqua
-[ 6 ] -- #ffd700 -- yellow
-[ 7 ] -- #1e90ff -- blue
-[ 8 ] -- #000000 -- black
-[ 9 ] -- #00ff7f -- Fuchsia
-[ 10 ] -- #8b4513 -- marron
-Eof
+echo -e "$BARRA"
+echo -e "\e[1;32m[1] > \e[31mRed"
+echo -e "\e[1;32m[2] > \e[32mGreen"
+echo -e "\e[1;32m[3] > \e[55mPurple"
+echo -e "\e[1;32m[4] > \e[85mTeal"
+echo -e "\e[1;32m[5] > \e[14mAqua"
+echo -e "\e[1;32m[6] > \e[33myellow"
+echo -e "\e[1;32m[7] > \e[34mblue"
+echo -e "\e[1;32m[8] > \e[47m\e[30mblack"
+echo -e "\e[1;32m[9] > \e[35mFuchsia"
+echo -e "\e[1;32m[10] > \e[130mBrown"
+echo -e "$BARRA"
 read -p "Opcion: " cor
 case $cor in
 "1")corx="<font color="red">${mensage}</font>";;
