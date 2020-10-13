@@ -109,6 +109,7 @@ read FMSG
 fi
 done
 echo -e "$BARRA"
+
 # read -p "Enter..."
 # Inicializando o Proxy
 (
