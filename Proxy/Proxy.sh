@@ -25,6 +25,7 @@ clear
 cowsay -f tux "Esta herramienta le cambia y da color al status de conexion y agrega una contrasena a tu payload para mayor seguridad...." | lolcat 
 figlet __TELLO__ | lolcat
 
+puerto () {
 if [[ -z $port ]]; then
 echo -e "$BARRA"
 echo -e "\033[1;31mPUERTO PROXY PYTHON\033[0m"
@@ -32,7 +33,9 @@ echo -e "$BARRA"
 echo -ne "Introduzca puerto proxy: "
 read port
 fi
+}
 
+puerto_local () {
 if [[ -z $portlocal ]]; then
 echo -e "$BARRA"
 echo -e "\033[1;31mPUERTO LOCAL\033[0m"
@@ -40,7 +43,9 @@ echo -e "$BARRA"
 echo -ne "Introduzca puerto local OpenSSH o Dropbear: "
 read portlocal
 fi
+}
 
+contra () {
 if [[ -z $ipdns ]]; then
 echo -e "$BARRA"
 echo -e "\033[1;31mAÑADIR CONTRASEÑA AL PAYLOAD\033[0m"
@@ -56,15 +61,17 @@ echo -e "\033[1;34mAGREGUE ESTA LINEA A SU PAYLOAD:\n\033[1;36m[crlf]X-Pass: $ip
 echo -e "\033[1;31mEJEMPLO 1:\n\033[1;33m\033[1;36m[crlf]X-Pass: $ipdns[crlf]GET http://tuhost.com/ HTTP/1.0 [cr|f]\033[0m"
 echo -e "\033[1;31mEJEMPLO 2:\n\033[1;33m\033[1;36mGET http://tuhost.com/ HTTP/1.0 [crlf][crlf]X-Pass: $ipdns[crlf]\033[0m"
 fi
+}
 
-while [[ -z $FMSG || $FMSG = @(s|S|y|Y) ]]; do
-
+mensaje () {
 if [[ -z $mensage ]]; then
 echo -e "$BARRA"
 echo -ne "Introduzca Un Mensaje De Status: "
 read mensage
 fi
+}
 
+color () {
 if [[ -z $cor ]]; then
 echo -e "$BARRA"
 echo -e "Seleccione El Color De Mensaje: "
@@ -96,18 +103,22 @@ case $cor in
 "10")corx="<font color="maroon">${mensage}</font>";;
 *)corx="<font color="red">${mensage}</font>";;
 esac
+
 if [[ ! -z ${RETORNO} ]]; then
 RETORNO="${RETORNO} ${corx}"
 else
 RETORNO="${corx}"
 fi
+}
 
+new_mensaje () {
 if [[ -z $FMSG ]]; then
 echo -e "$BARRA"
 echo -ne "Agregar Mas Mensajes? [S/N]: "
 read FMSG
 fi
-done
+}
+
 echo -e "$BARRA"
 
 # read -p "Enter..."
