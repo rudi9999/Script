@@ -1,8 +1,8 @@
 #!/bin/bash
 clear
-BARRA="\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
+BARRA="\033[0;49;31m============================================================\033[0m"
 echo -e $BARRA
-cowsay -f tux  "Esto le ayudara a crear un archivo swap para su sistema"
+echo -e "\033[7;107;31mEsto le ayudara a crear un archivo swap para su sistema\033[0m"
 echo -e $BARRA
 echo "Enter para continuar..."
 read foo
