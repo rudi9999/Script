@@ -151,8 +151,9 @@ echo -n "Opcion:"
 read opcion
 case $opcion in
 1)
-swapon $swap
+sed -i '/swap/d' $fstab
 echo "/swapfile none swap sw 0 0" >> $fstab
+swapon $swap
 clear
 echo -e $BARRA
 echo "memoria swap activada"
