@@ -1,36 +1,117 @@
 #!/bin/bash
 # -*- ENCODING: UTF-8 -*-
 BARRA="\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
-echo -e "\e[0;31m➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\e[0m"
-echo ""
 if [[ ! -e /usr/bin/python ]]; then
-apt-get install python python-pip cowsay figlet lolcat -y
 clear
 echo -e "$BARRA"
-echo -e "Ejecute de nuevo el script"
+echo -e "\033[92m El programa requiere de unas instalaciones adiccionales\n al finalizar la instalacion devera ejecutar nuevamente\n este script!"
 echo -e "$BARRA"
+echo -ne "\033[97m Desea continuar [s/n]: "
+read instal
+[[ $instal = @(s|S|y|Y) ]] && {
+clear
+echo -e "$BARRA"
+echo -e "\033[92m           -- INSTALANDO PAQUETES NECESARIOS -- "
+echo -e "$BARRA"
+#python
+[[ $(dpkg --get-selections|grep -w "python"|head -1) ]] || apt-get install python -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "python"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+[[ $(dpkg --get-selections|grep -w "python"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
+echo -e "\033[97m    # apt-get install python.......... $ESTATUS "
+#python-pip
+[[ $(dpkg --get-selections|grep -w "python-pip"|head -1) ]] || apt-get install python-pip -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "python-pip"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+[[ $(dpkg --get-selections|grep -w "python-pip"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
+echo -e "\033[97m    # apt-get install python-pip...... $ESTATUS "
+#cowsay
+[[ $(dpkg --get-selections|grep -w "cowsay"|head -1) ]] || apt-get install cowsay -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "cowsay"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+[[ $(dpkg --get-selections|grep -w "cowsay"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
+echo -e "\033[97m    # apt-get install cowsay.......... $ESTATUS "
+#figlet
+[[ $(dpkg --get-selections|grep -w "figlet"|head -1) ]] || apt-get install figlet -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "figlet"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+[[ $(dpkg --get-selections|grep -w "figlet"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
+echo -e "\033[97m    # apt-get install figlet.......... $ESTATUS "
+#lolcat
+apt-get install lolcat -y &>/dev/null
+sudo gem install lolcat &>/dev/null
+[[ $(dpkg --get-selections|grep -w "lolcat"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+[[ $(dpkg --get-selections|grep -w "lolcat"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
+echo -e "\033[97m    # apt-get install lolcat.......... $ESTATUS "
+echo -e "$BARRA"
+echo -e "\033[97m Ejecute de nuevo el script"
+echo -e "$BARRA"
+}
 exit
 fi
+
+        while :
+        do
+            case $1 in
+                -p|--port)
+                    port=$2
+                    shift 2
+                    ;;
+                -pl|--portlocal)
+                    portlocal=$2
+                    shift 2
+                    ;;
+                -i|--ipdns)
+                    ipdns=$2
+                    shift 2
+                    ;;
+                -tc|--textcolor)
+                    RETORNO=$2
+                    shift 2
+                    ;;
+                -h|--help)
+                    clear
+                    echo '=========================================================================='
+                    echo -e "      -p --port\n ingresa un puert para PYTHON\n ej: Proxy.sh -p 8080\n"
+                    echo -e "      -pl --portlocal\n selecciona un puerto local [OpenSSH o Dropbear]\n para la redireccion\n ej: Proxy.sh -pl 443\n"
+                    echo -e "      -i|--ipdns\n asigna una contraseña para mayor seguridad en la\n sintaxis del payload\n ej: Proxy.sh -i rufu99\n"
+                    echo -e "      -tc --textcolor\n ingresa un mini bnner [HTML] para el status\n de conexion" 
+                    echo -e ' ej: Proxy.sh -tc "<font color="red">VPS</font>"\n'
+                    echo -e "      -s|--start\n finaliza el ingresos de datos y continua con\n la ejecucion del script\n ej: Proxy.sh -i rufu99 --start\n"
+                    echo '                        ejemplo practico'
+                    echo '=========================================================================='
+                    echo './Proxy.sh -p 8080 -pl 443 -i rufu99 -tc "<font color="red">VPS</font>" --start'
+                    echo '=========================================================================='
+                    shift
+                    exit
+                    ;;
+                -s|--start)
+                    shift
+                    break
+                    ;;
+                *)
+
 clear
-cowsay -f tux "Esta herramienta le cambia y da color al status de conexion y agrega una contrasena a tu payload para mayor seguridad...." | lolcat 
+cowsay -f tux "Con esta herramienta podra cambia el texto y el color al status de conexion tambien podra agregar una contraseña a tu payload para mayor seguridad...." | lolcat 
 figlet __TELLO__ | lolcat
 
+[[ -z $port ]] && {
 echo -e "$BARRA"
 echo -e "\033[1;31mPUERTO PROXY PYTHON\033[0m"
 echo -e "$BARRA"
-echo -ne "Introduzca puerto proxy: "
+echo -ne "\033[1;49;37mIntroduzca puerto proxy: "
 read port
+}
 
+[[ -z $portlocal ]] && {
 echo -e "$BARRA"
 echo -e "\033[1;31mPUERTO LOCAL\033[0m"
 echo -e "$BARRA"
-echo -ne "Introduzca puerto local OpenSSH o Dropbear: "
+echo -ne "\033[1;49;37mIntroduzca puerto local OpenSSH o Dropbear: "
 read portlocal
+}
 
+[[ -z $ipdns ]] && {
 echo -e "$BARRA"
 echo -e "\033[1;31mAÑADIR CONTRASEÑA AL PAYLOAD\033[0m"
 echo -e "$BARRA"
-echo -ne "Contraseña o Enter para omitor: "
+echo -ne "\033[1;49;37mContraseña o Enter para omitor: "
 read ipdns
 if [[ ! -z $ipdns ]]; then
 echo -e "$BARRA"
@@ -39,12 +120,15 @@ echo -e "\033[1;34mAGREGUE ESTA LINEA A SU PAYLOAD:\n\033[1;36m[crlf]X-Pass: $ip
 echo -e "\033[1;31mEJEMPLO 1:\n\033[1;33m\033[1;36m[crlf]X-Pass: $ipdns[crlf]GET http://tuhost.com/ HTTP/1.0 [cr|f]\033[0m"
 echo -e "\033[1;31mEJEMPLO 2:\n\033[1;33m\033[1;36mGET http://tuhost.com/ HTTP/1.0 [crlf][crlf]X-Pass: $ipdns[crlf]\033[0m"
 fi
+}
+
+[[ -z $RETORNO ]] && {
 while [[ -z $FMSG || $FMSG = @(s|S|y|Y) ]]; do
 echo -e "$BARRA"
-echo -ne "Introduzca Un Mensaje De Status: "
+echo -ne "\033[1;49;37mIntroduzca Un Mensaje De Status: "
 read mensage
 echo -e "$BARRA"
-echo -e "Seleccione El Color De Mensaje: "
+echo -e "\033[1;49;37mSeleccione El Color De Mensaje: "
 echo -e "$BARRA"
 echo -e "\033[1;49;92m[1] > \033[0;49;31mRed"
 echo -e "\033[1;49;92m[2] > \033[0;49;32mGreen"
@@ -57,7 +141,8 @@ echo -e "\033[1;49;92m[8] > \033[0;107;30mblack\e[0m"
 echo -e "\033[1;49;92m[9] > \033[0;49;95mFuchsia"
 echo -e "\033[1;49;92m[10] > \033[0;49;33mBrown"
 echo -e "$BARRA"
-read -p "Opcion: " cor
+echo -ne "\033[1;49;37mOpcion: "
+read cor
 case $cor in
 "1")corx="<font color="red">${mensage}</font>";;
 "2")corx="<font color="green">${mensage}</font>";;
@@ -77,11 +162,23 @@ else
 RETORNO="${corx}"
 fi
 echo -e "$BARRA"
-echo -ne "Agregar Mas Mensajes? [S/N]: "
+echo -ne "\033[1;49;37mAgregar Mas Mensajes? [S/N]: "
 read FMSG
 done
+}
+
 echo -e "$BARRA"
-read -p "Enter..."
+echo -ne "\033[1;49;37mEnter para ejecutar"
+read foo
+start_exit=1
+
+
+                    shift
+                    break
+                    ;;
+            esac
+        done
+
 # Inicializando o Proxy
 (
 /usr/bin/python -x << PYTHON
@@ -328,7 +425,8 @@ if __name__ == '__main__':
     main()
 PYTHON
 ) > $HOME/proxy.log &
+[[ ! -z $start_exit ]] && {
 echo -e "$BARRA"
-echo -e "\e[1;31mProxy Iniciado Con Exito\e[0m"
-echo ""
-echo
+echo -e "\033[1;49;37mProxy Iniciado Con Exito"
+echo -e "$BARRA"
+}
