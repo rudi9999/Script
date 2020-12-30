@@ -68,7 +68,8 @@ msg -bar
 echo -ne "Ejcutar python directo despues de un reinicio [s/n]: "
 read start_cron
 [[ $start_cron = @(s|S|y|Y) ]] && {
-	echo "${SCPinst}/Proxy.sh -p "$porta_socket" -pl "$puetoantla" -tc "$texto_soket" --start" >> /etc/cron
+	echo "${SCPinst}/Proxy.sh -p "$porta_socket" -pl "$puetoantla" -tc "$texto_soket" --start" >> /bin/cron
+	chmod 777 /bin/cron
 }
 ${SCPinst}/Proxy.sh -p "$porta_socket" -pl "$puetoantla" -tc "$texto_soket" --start && echo ""$porta_socket" "$texto_soket"" >> /etc/newadm/PortPD.log
 }
@@ -94,7 +95,7 @@ pidproxy5=$(ps x | grep "PGet.py" | grep -v "grep" | awk -F "pts" '{print $1}') 
 pidproxy6=$(ps x | grep "scktcheck" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy6 ]] && pid_kill $pidproxy6
 
 pidproxy3=$(ps x | grep "python -x" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy3 ]] && pid_kill $pidproxy3
-sed -i '/Proxy.sh/ d' /etc/cron
+sed -i '/Proxy.sh/ d' /bin/cron
 
 echo -e "\033[1;91m  $(fun_trans  "Socks DETENIDOS")"
 msg -bar
