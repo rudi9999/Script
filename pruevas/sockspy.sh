@@ -38,7 +38,7 @@ chmod +x  /usr/sbin/sckt
 rm -rf $HOME/socks
 cd $HOME
 msg="$2"
-[[ $msg = "" ]] && msg="@Kalix1"
+[[ $msg = "" ]] && msg="@Rufu99"
 portxz="$1"
 [[ $portxz = "" ]] && portxz="8080"
 screen -dmS sokz scktcheck "$portxz" "$msg" > /dev/null 2>&1
@@ -61,21 +61,21 @@ screen -dmS getpy python ${SCPinst}/PGet.py -b "0.0.0.0:$1" -p "${SCPinst}/pwd.p
 }
 
 PythonDic_fun () {
-echo -e "\033[1;97mSelecciona Puerto Local\033[1;37m" 
+echo -e "\033[1;97m Selecciona Puerto Local\033[1;37m" 
 msg -bar
-echo -ne "Digite Un Puerto SSH/DROPBEAR activo: \033[1;37m" && read puetoantla 
+echo -ne "\033[1;97m Digite Un Puerto SSH/DROPBEAR activo: \033[1;37m" && read puetoantla 
 msg -bar
-echo -ne "Ejcutar python directo despues de un reinicio [s/n]: "
+echo -ne "\033[1;97m Ejcutar python directo despues de un reinicio [s/n]: "
 read start_cron
+msg -bar
 [[ $start_cron = @(s|S|y|Y) ]] && {
-	echo "${SCPinst}/Proxy.sh -p "$porta_socket" -pl "$puetoantla" -tc "$texto_soket" --start" >> /bin/cron
-	chmod 777 /bin/cron
+	crontab -l > /root/cron
+	echo "@reboot ${SCPinst}/Proxy.sh -p "$porta_socket" -pl "$puetoantla" -tc \""$texto_soket"\" --start" >> /root/cron
+	crontab /root/cron
+	rm /root/cron
 }
 ${SCPinst}/Proxy.sh -p "$porta_socket" -pl "$puetoantla" -tc "$texto_soket" --start && echo ""$porta_socket" "$texto_soket"" >> /etc/newadm/PortPD.log
 }
-
-
-
 
 pid_kill () {
 [[ -z $1 ]] && refurn 1
@@ -95,7 +95,10 @@ pidproxy5=$(ps x | grep "PGet.py" | grep -v "grep" | awk -F "pts" '{print $1}') 
 pidproxy6=$(ps x | grep "scktcheck" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy6 ]] && pid_kill $pidproxy6
 
 pidproxy3=$(ps x | grep "python -x" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy3 ]] && pid_kill $pidproxy3
-sed -i '/Proxy.sh/ d' /bin/cron
+crontab -l > /root/cron
+sed -i '/Proxy.sh/ d' /root/cron
+crontab /root/cron
+rm /root/cron
 
 echo -e "\033[1;91m  $(fun_trans  "Socks DETENIDOS")"
 msg -bar
@@ -111,7 +114,7 @@ pidproxy3=$(ps x | grep -w  "python -x" | grep -v "grep" | awk -F "pts" '{print 
 pidproxy4=$(ps x | grep -w  "POpen.py" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy4 ]] && P4="\033[1;32m[ON]" || P4="\033[1;31m[OFF]"
 pidproxy5=$(ps x | grep "PGet.py" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy5 ]] && P5="\033[1;32m[ON]" || P5="\033[1;31m[OFF]"
 pidproxy6=$(ps x | grep "scktcheck" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy6 ]] && P6="\033[1;32m[ON]" || P6="\033[1;31m[OFF]"
-echo -e "\033[1;32m $(fun_trans  "INSTALADOR SOCKS VPS-MX By MOD @Kalix1")"
+echo -e "\033[1;32m $(fun_trans  "INSTALADOR SOCKS VPS-MX By MOD @Rufu99")"
 msg -bar
 echo -e "${cor[4]} [1] > \033[1;36m$(fun_trans  "Socks Python SIMPLE") $P1"
 echo -e "${cor[4]} [2] > \033[1;36m$(fun_trans  "Socks Python SEGURO") $P2"
@@ -131,16 +134,16 @@ done
     7)remove_fun;;
     0)return;;
  esac
-echo -e "Selecciona Puerto Principal del Proxy"
+echo -e "\033[1;97m Selecciona Puerto Principal del Proxy"
 msg -bar
 porta_socket=
 while [[ -z $porta_socket || ! -z $(mportas|grep -w $porta_socket) ]]; do
-echo -ne "Digite el Puerto: \033[1;37m" && read porta_socket
+echo -ne "\033[1;97m Digite el Puerto: \033[1;37m" && read porta_socket
 tput cuu1 && tput dl1
 done
-echo -e "$(fun_trans  "Introdusca su Mini-Banner")"
+echo -e "$(fun_trans  "       Introdusca su Mini-Banner")"
 msg -bar
-echo -ne "Introduzca el texto de estado plano o en HTML:\n \033[1;37m" && read texto_soket
+echo -ne "\033[1;97m Introduzca un texto [Plano] o en [HTML]\n\n \033[1;37m" && read texto_soket
     msg -bar
     case $portproxy in
     1)screen -dmS screen python ${SCPinst}/PPub.py "$porta_socket" "$texto_soket";;
@@ -150,7 +153,7 @@ echo -ne "Introduzca el texto de estado plano o en HTML:\n \033[1;37m" && read t
     5)gettunel_fun "$porta_socket";;
     6)tcpbypass_fun "$porta_socket" "$texto_soket";;
     esac
-echo -e "\033[1;92m$(fun_trans "Procedimiento COMPLETO")"
+echo -e "\033[1;92m$(fun_trans " Procedimiento COMPLETO")"
 msg -bar
 }
 iniciarsocks
