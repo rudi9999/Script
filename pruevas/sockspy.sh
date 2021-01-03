@@ -74,7 +74,8 @@ msg -bar
 	crontab /root/cron
 	rm /root/cron
 }
-${SCPinst}/Proxy.sh -p "$porta_socket" -pl "$puetoantla" -tc "$texto_soket" --start && echo ""$porta_socket" "$texto_soket"" >> /etc/newadm/PortPD.log
+texto="$(echo ${texto_soket} | sed 's/\"//g')"
+${SCPinst}/Proxy.sh -p "$porta_socket" -pl "$puetoantla" -tc "$texto" -s && echo ""$porta_socket" "$texto_soket"" >> /etc/newadm/PortPD.log
 }
 
 pid_kill () {
@@ -114,14 +115,14 @@ pidproxy3=$(ps x | grep -w  "python -x" | grep -v "grep" | awk -F "pts" '{print 
 pidproxy4=$(ps x | grep -w  "POpen.py" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy4 ]] && P4="\033[1;32m[ON]" || P4="\033[1;31m[OFF]"
 pidproxy5=$(ps x | grep "PGet.py" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy5 ]] && P5="\033[1;32m[ON]" || P5="\033[1;31m[OFF]"
 pidproxy6=$(ps x | grep "scktcheck" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy6 ]] && P6="\033[1;32m[ON]" || P6="\033[1;31m[OFF]"
-echo -e "\033[1;32m $(fun_trans  "INSTALADOR SOCKS VPS-MX By MOD @Rufu99")"
+echo -e "\033[1;32m $(fun_trans  "INSTALADOR SOCKS SPIDER-VPS By MOD @Rufu99")"
 msg -bar
-echo -e "${cor[4]} [1] > \033[1;36m$(fun_trans  "Socks Python SIMPLE") $P1"
-echo -e "${cor[4]} [2] > \033[1;36m$(fun_trans  "Socks Python SEGURO") $P2"
-echo -e "${cor[4]} [3] > \033[1;36m$(fun_trans  "Socks Python DIRETO") $P3"
-echo -e "${cor[4]} [4] > \033[1;36m$(fun_trans  "Socks Python OPENVPN") $P4"
-echo -e "${cor[4]} [5] > \033[1;36m$(fun_trans  "Socks Python GETTUNEL") $P5"
-echo -e "${cor[4]} [6] > \033[1;36m$(fun_trans  "Socks Python TCP BYPASS") $P6"
+echo -e "${cor[4]} [1] > \033[1;36m$(fun_trans  "Socks Python SIMPLE")      $P1"
+echo -e "${cor[4]} [2] > \033[1;36m$(fun_trans  "Socks Python SEGURO")      $P2"
+echo -e "${cor[4]} [3] > \033[1;36m$(fun_trans  "Socks Python DIRETO") [PC] $P3"
+echo -e "${cor[4]} [4] > \033[1;36m$(fun_trans  "Socks Python OPENVPN")     $P4"
+echo -e "${cor[4]} [5] > \033[1;36m$(fun_trans  "Socks Python GETTUNEL")    $P5"
+echo -e "${cor[4]} [6] > \033[1;36m$(fun_trans  "Socks Python TCP BYPASS")  $P6"
 echo -e "${cor[4]} [7] > \033[1;36m$(fun_trans  "PARAR TODOS SOCKS PYTHON")"
 echo -e "${cor[4]} [0] > \033[1;37m$(fun_trans  "VOLVER")"
 msg -bar
