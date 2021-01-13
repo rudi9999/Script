@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /etc/newadm
 mv menu menu.back
-wget 
+wget https://github.com/rudi9999/Script/raw/master/menu
 chmod +x menu
 cd $home
 rm menu_update.sh
