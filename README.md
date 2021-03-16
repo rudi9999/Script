@@ -5,3 +5,7 @@ sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/swapfile.sh; 
 # Proxy-Privado
 
 sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/Proxy.sh; chmod +x Proxy.sh* && ./Proxy.sh
+
+# Certificado
+
+sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/certificado.sh; chmod +x certificado.sh* && ./certificado.sh
