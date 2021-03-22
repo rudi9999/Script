@@ -108,7 +108,7 @@ port_exist_check() {
                         for i in ${ports[@]}; do
                             [[ 0 -eq $(lsof -i:$i | grep -i -c "listen") ]] && {
                                 echo -ne "       liberando puerto $i ... "
-                                lsof -i:"$i" | awk '{print $2}' | grep -v "PID" | xargs kill -9
+                                lsof -i:$i | awk '{print $2}' | grep -v "PID" | xargs kill -9
                                 echo -e "[OK]"
                                 ok=0
                             }
