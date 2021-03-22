@@ -124,10 +124,14 @@ ssl_judge_and_install() {
     do
 
     if [[ -f "/data/v2ray.key" || -f "/data/v2ray.crt" ]]; then
-        echo " ya existen archivos de certificados en el directorio asignado"
+        clear
+        echo $barra
+        echo " ya existen archivos de certificados"
+        echo " en el directorio asignado."
         echo $barra
         echo " ENTER para canselar la instacion."
-        echo " S para eliminar y continuar"
+        echo " 'S' para eliminar y continuar"
+        echo $barra
         echo -ne " opcion: "
         read -r ssl_delete
         case $ssl_delete in
@@ -141,11 +145,14 @@ ssl_judge_and_install() {
     fi
 
     if [[ -f "$HOME/.acme.sh/${domain}_ecc/${domain}.key" || -f "$HOME/.acme.sh/${domain}_ecc/${domain}.cer" ]]; then
-        echo " ya existe un almacer de certificado bajo este nombre de dominio"
+        echo $barra
+        echo " ya existe un almacer de certificado"
+        echo " bajo este nombre de dominio"
         echo $barra
         echo " ENTER canselar instalacion"
         echo " D para eliminar"
         echo " R para restaurar"
+        echo $barra
         echo -ne " opcion: "
         read opcion
         case $opcion in
@@ -161,8 +168,8 @@ ssl_judge_and_install() {
             *) break;;
         esac
     fi
-    done
     acme
+    done
 }
 
 ssl_install() {
