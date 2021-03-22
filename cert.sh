@@ -163,7 +163,6 @@ ssl_judge_and_install() {
                         ;;
             *) break;;
         esac
-    else
     fi
     done
     acme
