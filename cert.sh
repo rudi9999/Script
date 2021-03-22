@@ -115,6 +115,7 @@ port_exist_check() {
     esac
     echo " ENTER continuar, CRTL + C para canselar..."
     read foo
+    break
     done
 }
 
