@@ -90,16 +90,14 @@ port_exist_check() {
     case $opcion in
         [Ss]|[Yy])         
                     ports=('80' '443')
-                    ok=1
                     clear
-                    while [[ ! $ok = 0 ]]; do
                         echo $barra
                         echo "      comprovando puertos..."
                         echo $barra
                         sleep 2
                         for i in ${ports[@]}; do
                             [[ 0 -eq $(lsof -i:$i | grep -i -c "listen") ]] && {
-                                echo -e "    \033[3;49;32m$i [OK]\033[0m"
+                                echo -e "    \033[3;49;32m$i [OK]\033[0m" 
                             } || {
                                 echo -e "    \033[3;49;31m$i [fail]\033[0m"
                             }
@@ -110,10 +108,8 @@ port_exist_check() {
                                 echo -ne "       liberando puerto $i ... "
                                 lsof -i:$i | awk '{print $2}' | grep -v "PID" | xargs kill -9
                                 echo -e "[OK]"
-                                ok=0
                             }
-                        done
-                    done;;
+                        done;;
         [Nn]) echo -e "\n instalacion cancelada..." && sleep 2 && exit;;
         *) echo -e "\n selecione (S) para si o (N) para no!" && sleep 2;;
     esac
