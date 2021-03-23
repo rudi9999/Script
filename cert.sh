@@ -221,7 +221,7 @@ acme() {
         exit 1
     fi
 }
-ssl_install
+
 domain_check
 port_exist_check
 ssl_install
