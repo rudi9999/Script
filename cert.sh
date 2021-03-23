@@ -7,8 +7,8 @@ domain_check() {
     echo $barra
     echo -e "   \033[1;49;37mgenerador de certificado ssl/tls\033[0m"
     echo $barra
-    echo -e " \033[1;49;37mingrese su dominio (ej: midominio.com.ar)"
-    ecno -ne ' dominio:\033[0m '
+    echo -e " \033[1;49;37mingrese su dominio (ej: midominio.com.ar)\033[0m"
+    echo -ne ' \033[3;49;31m>>>\033[0m '
     read domain
 
     echo -e "\n \033[1;49;36mOteniendo resolucion dns de su dominio...\033[0m"
