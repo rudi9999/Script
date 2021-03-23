@@ -7,8 +7,8 @@ domain_check() {
     echo $barra
     echo -e "   \033[1;49;37mgenerador de certificado ssl/tls\033[0m"
     echo $barra
-    echo -e " \033[1;49;37mingrese su dominio (ej: midominio.com.ar)\033[0m"
-    ecno -ne ' >>> '
+    echo -e " \033[1;49;37mingrese su dominio (ej: midominio.com.ar)"
+    ecno -ne ' dominio:\033[0m '
     read domain
 
     echo -e "\n \033[1;49;36mOteniendo resolucion dns de su dominio...\033[0m"
@@ -49,7 +49,7 @@ domain_check() {
             echo -e " \033[1;49;37mIP local:\033[0m    \033[3;49;31m${local_ip}\033[0m"
             echo $barra
             echo -e "      \033[3;49;31mComprovacion fallida\033[0m"
-            echo -e " \033[4;49;97mLa IP de su dominio no coincide\n         con la IP local\033[0m"
+            echo -e " \033[4;49;97mLa IP de su dominio no coincide\033[0m\n         \033[4;49;97mcon la IP local\033[0m"
             echo $barra
             echo -e " \033[1;49;36m> Asegúrese que se agrego el registro"
             echo -e "   (A) correcto al nombre de dominio."
