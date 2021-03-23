@@ -149,26 +149,30 @@ ssl_judge_and_install() {
         echo " ya existe un almacer de certificado"
         echo " bajo este nombre de dominio"
         echo $barra
-        echo " ENTER canselar instalacion"
-        echo " D para eliminar"
-        echo " R para restaurar"
+        echo " ENTER cansela la instalacion"
+        echo " D para eliminar y continuar"
+        echo " R para restaurar el almacen crt"
         echo $barra
         echo -ne " opcion: "
         read opcion
         case $opcion in
             [Dd])
                         echo " eliminando almacen cert..."
+                        sleep 2
                         rm -rf $HOME/.acme.sh/${domain}_ecc
                         ;;
             [Rr])
                         echo " restaurando certificados..."
                         sleep 2
                         "$HOME"/.acme.sh/acme.sh --installcert -d "${domain}" --fullchainpath /data/v2ray.crt --keypath /data/v2ray.key --ecc
+                        echo " restauracion completa...[ok]"
+                        break
                         ;;
             *) break;;
         esac
     fi
     acme
+    break
     done
 }
 
@@ -179,26 +183,30 @@ ssl_install() {
 }
 
 acme() {
+    clear
+    echo $barra
+    echo " creando nuevos certificado ssl/tls"
+    echo $barra
     if "$HOME"/.acme.sh/acme.sh --issue -d "${domain}" --standalone -k ec-256 --force --test; then
-        echo -e "SSL La prueba del certificado se emite con éxito y comienza la emisión oficial"
+        echo -e " SSL La prueba del certificado se emite con éxito y comienza la emisión oficial"
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
         sleep 2
     else
-        echo -e "Error en la emisión de la prueba del certificado SSL"
+        echo -e " Error en la emisión de la prueba del certificado SSL"
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
         exit 1
     fi
 
     if "$HOME"/.acme.sh/acme.sh --issue -d "${domain}" --standalone -k ec-256 --force; then
-        echo -e "SSL El certificado se genero con éxito"
+        echo -e " SSL El certificado se genero con éxito"
         sleep 2
         mkdir /data
         if "$HOME"/.acme.sh/acme.sh --installcert -d "${domain}" --fullchainpath /data/v2ray.crt --keypath /data/v2ray.key --ecc --force; then
-            echo -e "La configuración del certificado es exitosa"
+            echo -e " La configuración del certificado es exitosa"
             sleep 2
         fi
     else
-        echo -e "Error al generar el certificado SSL"
+        echo -e " Error al generar el certificado SSL"
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
         exit 1
     fi
