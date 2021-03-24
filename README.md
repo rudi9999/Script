@@ -9,3 +9,7 @@ sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/Proxy.sh; chm
 # Certificado
 
 sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/certificado.sh; chmod +x certificado.sh* && ./certificado.sh
+
+# V2ray Manager
+
+sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/install-v2r.sh; chmodo +x install-v2r.sh; ./install-v2r.sh; rm install-v2r.sh
