@@ -303,6 +303,14 @@ start_ssl(){
 	service stunnel4 restart
  }
 
+pid_kill () {
+	[[ -z $1 ]] && refurn 1
+	pids="$@"
+	for pid in $(echo $pids); do
+		kill -9 $pid &>/dev/null
+	done
+ }
+
 stop_py(){
 	pidproxy3=$(ps x | grep "python -x" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy3 ]] && pid_kill $pidproxy3
 	echo -e "\033[1;91m  Socks DETENIDOS"
