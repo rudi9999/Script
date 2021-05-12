@@ -3,7 +3,6 @@
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
 SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
 SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
-BARRA=$(msg -bar)
 mportas () {
 unset portas
 portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -172,9 +171,9 @@ continuar(){
 domain_check() {
   ssl_install_fun
     clear
-    echo -e $BARRA
+    msg -bar
     echo -e "   \033[1;49;37mgenerador de certificado ssl/tls\033[0m"
-    echo -e $BARRA
+    msg -bar
     echo -e " \033[1;49;37mingrese su dominio (ej: midominio.com.ar)\033[0m"
     echo -ne ' \033[3;49;31m>>>\033[0m '
     read domain
@@ -190,15 +189,15 @@ domain_check() {
     do
     if [[ $(echo "${local_ip}" | tr '.' '+' | bc) -eq $(echo "${domain_ip}" | tr '.' '+' | bc) ]]; then
             clear
-            echo -e $BARRA
+            msg -bar
             echo -e " \033[1;49;37mSu dominio: ${domain}\033[0m"
-            echo -e $BARRA
+            msg -bar
             echo -e " \033[1;49;37mIP dominio:\033[0m  \033[1;49;32m${domain_ip}\033[0m"
             echo -e " \033[1;49;37mIP local:\033[0m    \033[1;49;32m${local_ip}\033[0m"
-            echo -e $BARRA
+            msg -bar
             echo -e "      \033[1;49;32mComprovacion exitosa\033[0m"
             echo -e " \033[1;49;37mLa IP de su dominio coincide\n con la IP local, desea continuar?\033[0m"
-            echo -e $BARRA
+            msg -bar
             echo -ne " \033[1;49;37msi o no [S/N]:\033[0m "
             read opcion
             case $opcion in
@@ -208,15 +207,15 @@ domain_check() {
             esac
     else
             clear
-            echo -e $BARRA
+            msg -bar
             echo -e " \033[1;49;37mSu dominio: ${domain}\033[0m"
-            echo -e $BARRA
+            msg -bar
             echo -e " \033[1;49;37mIP dominio:\033[0m  \033[3;49;31m${domain_ip}\033[0m"
             echo -e " \033[1;49;37mIP local:\033[0m    \033[3;49;31m${local_ip}\033[0m"
-            echo -e $BARRA
+            msg -bar
             echo -e "      \033[3;49;31mComprovacion fallida\033[0m"
             echo -e " \033[4;49;97mLa IP de su dominio no coincide\033[0m\n         \033[4;49;97mcon la IP local\033[0m"
-            echo -e $BARRA
+            msg -bar
             echo -e " \033[1;49;36m> Asegúrese que se agrego el registro"
             echo -e "   (A) correcto al nombre de dominio."
             echo -e " > Asegurece que su registro (A)"
@@ -224,7 +223,7 @@ domain_check() {
             echo -e "   adiccional y que solo resuelva DNS."
             echo -e " > De lo contrario, ssl no se puede"
             echo -e "   utilizar normalmente...\033[0m"
-            echo -e $BARRA
+            msg -bar
             echo -e " \033[1;49;37mdesea continuar?"
             echo -ne " si o no [S/N]:\033[0m "
             read opcion
@@ -242,7 +241,7 @@ port_exist_check() {
     while :
     do
     clear
-    echo -e $barra
+    msg -bar
     echo -e " \033[1;49;37mPara la compilacion del certificado"
     echo -e " se requiere que los siguientes puerto"
     echo -e " esten libres."
@@ -250,7 +249,7 @@ port_exist_check() {
     echo -e " este script intentara detener"
     echo -e " cualquier proseso que este"
     echo -e " usando estos puertos\033[0m"
-    echo -e $barra
+    msg -bar
     echo -e " \033[1;49;37mdesea continuar?"
     echo -ne " [S/N]:\033[0m "
     read opcion
@@ -259,9 +258,9 @@ port_exist_check() {
         [Ss]|[Yy])         
                     ports=('80' '443')
                     clear
-                        echo -e $barra
+                        msg -bar
                         echo -e "      \033[1;49;37mcomprovando puertos...\033[0m"
-                        echo -e $barra
+                        msg -bar
                         sleep 2
                         for i in ${ports[@]}; do
                             [[ 0 -eq $(lsof -i:$i | grep -i -c "listen") ]] && {
@@ -270,7 +269,7 @@ port_exist_check() {
                                 echo -e "    \033[3;49;31m$i [fail]\033[0m"
                             }
                         done
-                        echo -e $barra
+                        msg -bar
                         for i in ${ports[@]}; do
                             [[ 0 -ne $(lsof -i:$i | grep -i -c "listen") ]] && {
                                 echo -ne "       \033[1;49;37mliberando puerto $i...\033[1;49;37m "
@@ -294,13 +293,13 @@ ssl_install() {
 
     if [[ -f "/etc/stunnel/stunnel.pem" ]]; then
         clear
-        echo -e $BARRA
+        msg -bar
         echo -e " \033[1;49;37mya existen archivos de certificados"
         echo -e " en el directorio asignado.\033[0m"
-        echo -e $BARRA
+        msg -bar
         echo -e " \033[1;49;37mENTER para canselar la instacion."
         echo -e " 'S' para eliminar y continuar\033[0m"
-        echo -e $BARRA
+        msg -bar
         echo -ne " opcion: "
         read ssl_delete
         case $ssl_delete in
@@ -314,14 +313,14 @@ ssl_install() {
     fi
 
     if [[ -f "$HOME/.acme.sh/${domain}_ecc/${domain}.key" || -f "$HOME/.acme.sh/${domain}_ecc/${domain}.cer" ]]; then
-        echo -e $BARRA
+        msg -bar
         echo -e " \033[1;49;37mya existe un almacer de certificado"
         echo -e " bajo este nombre de dominio\033[0m"
-        echo -e $BARRA
+        msg -bar
         echo -e " \033[1;49;37m'ENTER' cansela la instalacion"
         echo -e " 'D' para eliminar y continuar"
         echo -e " 'R' para restaurar el almacen crt\033[0m"
-        echo -e $BARRA
+        msg -bar
         echo -ne " opcion: "
         read opcion
         case $opcion in
@@ -363,16 +362,16 @@ ssl_install_fun() {
 
 acme() {
     clear
-    echo -e $BARRA
+    msg -bar
     echo -e " \033[1;49;37mcreando nuevos certificado ssl/tls\033[0m"
-    echo -e $BARRA
+    msg -bar
     if "$HOME"/.acme.sh/acme.sh --issue -d "${domain}" --standalone -k ec-256 --force --test; then
         echo -e "\n           \033[1;49;37mSSL La prueba del certificado\n se emite con éxito y comienza la emisión oficial\033[0m\n"
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
         sleep 2
     else
         echo -e "\n \033[4;49;31mError en la emisión de la prueba del certificado SSL\033[0m"
-        echo -e $BARRA
+        msg -bar
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
         stop=1
     fi
@@ -381,23 +380,23 @@ acme() {
 
     if "$HOME"/.acme.sh/acme.sh --issue -d "${domain}" --standalone -k ec-256 --force; then
         echo -e "\n \033[1;49;37mSSL El certificado se genero con éxito\033[0m"
-        echo -e $BARRA
+        msg -bar
         sleep 2
         [[ ! -d /etc/stunnel ]] && mkdir /etc/stunnel
         if "$HOME"/.acme.sh/acme.sh --installcert -d "${domain}" --fullchainpath /root/ssl.crt --keypath /root/ssl.key --ecc --force; then
             cat /root/ssl.crt /root/ssl.key > /etc/stunnel/stunnel.pem
             rm /root/ssl.crt
             rm /root/ssl.key
-            echo -e $BARRA
+            msg -bar
             echo -e "\n \033[1;49;37mLa configuración del certificado es exitosa\033[0m"
-            echo -e $BARRA
+            msg -bar
             echo -e "      /etc/stunnel/stunnel.pem"
-            echo -e $BARRA
+            msg -bar
             sleep 2
         fi
     else
         echo -e "\n \033[4;49;31mError al generar el certificado SSL\033[0m"
-        echo -e $BARRA
+        msg -bar
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
     fi
     fi
@@ -485,7 +484,8 @@ return 0
 }
 ssl_inst
 }
-
+clear
+msg -bar
 echo -e "${cor[3]}INSTALADOR SSL By @Rufu99"
 msg -bar
 echo -e "${cor[1]} Escoja la opcion deseada."
