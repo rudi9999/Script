@@ -130,6 +130,8 @@ echo -e "\033[1;33m $(fun_trans  "Parado Con Exito!")"
 msg -bar
 return 0
 }
+clear
+msg -bar
 echo -e "\033[1;32m $(fun_trans  "INSTALADOR SSL By @Rufu99")"
 msg -bar
 echo -e "\033[1;33m $(fun_trans  "Seleccione una puerta de redirección interna.")"
@@ -342,7 +344,14 @@ ssl_install() {
                         rm /root/ssl.crt
                         rm /root/ssl.key
                         echo -e " \033[1;49;37mrestauracion completa...\033[0m\033[1;49;92m[ok]\033[0m"
+                        
+                        sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+                        service stunnel4 restart > /dev/null 2>&1
+                        msg -bar
+                        echo -e "\033[1;33m $(fun_trans  "INSTALADO CON EXITO")"
+                        msg -bar
                         sleep 2
+                        return 0
                         break
                         ;;
             *) cancelar && sleep 2 && break;;
@@ -413,6 +422,7 @@ acme() {
 
 ssl_inst(){
   clear
+  msg -bar
   echo -e "${cor[1]} Escoja la opcion deseada."
   msg -bar
   echo "1).- SSL CON CERTIFICACION LOCAL"
