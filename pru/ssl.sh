@@ -491,7 +491,7 @@ read opcao
 case $opcao in
 1)
 msg -bar
-ssl_stunel
+ssl_inst
 ;;
 2)
 msg -bar
