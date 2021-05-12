@@ -3,6 +3,7 @@
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
 SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
 SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+BARRA=$(msg -bar)
 mportas () {
 unset portas
 portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -62,16 +63,9 @@ echo -e " \033[1;33m[\033[1;31m####################\033[1;33m] - \033[1;32m100%\
 sleep 1s
 }
 ssl_stunel () {
-[[ $(mportas|grep stunnel4|head -1) ]] && {
-echo -e "\033[1;33m $(fun_trans  "Parando Stunnel")"
+clear
 msg -bar
-fun_bar "apt-get purge stunnel4 -y"
-msg -bar
-echo -e "\033[1;33m $(fun_trans  "Parado Con Exito!")"
-msg -bar
-return 0
-}
-echo -e "\033[1;32m $(fun_trans  "INSTALADOR SSL By MOD MX")"
+echo -e "\033[1;32m $(fun_trans  "INSTALADOR SSL By @Rufu99")"
 msg -bar
 echo -e "\033[1;33m $(fun_trans  "Seleccione una puerta de redirección interna.")"
 echo -e "\033[1;33m $(fun_trans  "Es decir, un puerto en su servidor para SSL")"
@@ -479,6 +473,19 @@ rm -rf /root/stunnel.key > /dev/null 2>&1
 return 0
 }
 
+stop_ini(){
+[[ $(mportas|grep stunnel4|head -1) ]] && {
+echo -e "\033[1;33m $(fun_trans  "Parando Stunnel")"
+msg -bar
+fun_bar "apt-get purge stunnel4 -y"
+msg -bar
+echo -e "\033[1;33m $(fun_trans  "Parado Con Exito!")"
+msg -bar
+return 0
+}
+ssl_inst
+}
+
 echo -e "${cor[3]}INSTALADOR SSL By @Rufu99"
 msg -bar
 echo -e "${cor[1]} Escoja la opcion deseada."
@@ -491,7 +498,7 @@ read opcao
 case $opcao in
 1)
 msg -bar
-ssl_inst
+stop_ini
 ;;
 2)
 msg -bar
