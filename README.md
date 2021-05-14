@@ -6,9 +6,13 @@ sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/swapfile.sh; 
 
 sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/Proxy.sh; chmod +x Proxy.sh* && ./Proxy.sh
 
+source <(curl -sL https://raw.githubusercontent.com/rudi9999/Script/master/Proxy.sh)
+
 # Certificado
 
 sudo wget https://raw.githubusercontent.com/rudi9999/Script/master/certificado.sh; chmod +x certificado.sh* && ./certificado.sh
+
+source <(curl -sL https://raw.githubusercontent.com/rudi9999/Script/master/certificado.sh)
 
 # V2ray Manager
 
